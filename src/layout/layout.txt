@@ -1,0 +1,1 @@
+khung sườn của trang nhớ tách ra admin và customer thành 2 file jsx riêng biệt
