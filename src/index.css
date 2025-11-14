@@ -1,0 +1,67 @@
+/* ======== CÀI ĐẶT CHUNG ======== */
+:root {
+    --primary-color: #222;
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --text-secondary: #666;
+    --text-green: #27ae60;
+    --header-bg: #ffffff;
+    --footer-bg: #ffffff;
+    
+    /* Màu trạng thái */
+    --color-cho-xu-ly-bg: #fef3c7;
+    --color-cho-xu-ly-text: #a16207;
+    --color-dang-xu-ly-bg: #dbeafe;
+    --color-dang-xu-ly-text: #1e40af;
+    --color-dang-giao-bg: #fee2e2;
+    --color-dang-giao-text: #991b1b;
+    --color-hoan-thanh-bg: #dcfce7;
+    --color-hoan-thanh-text: #166534;
+    --color-huy-bg: #f1f5f9;
+    --color-huy-text: #334155;
+
+    /* Màu nút */
+    --nut-chinh-bg: #111;
+    --nut-chinh-text: #fff;
+    --nut-phu-bg: #f1f5f9;
+    --nut-phu-text: #334155;
+    --nut-huy-bg: #fee2e2;
+    --nut-huy-text: #991b1b;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+button, select {
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+}
