@@ -7,8 +7,8 @@ const Header = () => {
       <div className="header__logo">Tenbrand</div>
       <nav className="header__dieu_huong">
         <ul>
-          <li className="dang_chon"><a href="index.html">Tổng quan</a></li>
-          <li><a href="Ban_hang.html">Bán hàng</a></li>
+          <li ><a href="index.html">Tổng quan</a></li>
+          <li className="dang_chon"><a href="Ban_hang.html">Bán hàng</a></li>
           <li><a href="Khach.html">Khách</a></li>
           <li><a href="Kho.html">Kho</a></li>
           <li><a href="Marketing.html">Marketing</a></li>

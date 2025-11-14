@@ -1,18 +1,19 @@
 import React from 'react';
-import Header from './components/admin/Header';
-import Footer from './components/admin/Footer';
-import TongQuan from './pages/admin/Tongquan';
+import Header from './components/admin/Header/Header';
+import Footer from './components/admin/Footer/Footer';
+//import TongQuan from './pages/admin/Tongquan/Tongquan';
+import BanHang from './pages/admin/BanHang/BanHang';
 
 function App() {
   return (
     <div className="App">
       <Header />
       
-      {/* Sau này bạn sẽ dùng React Router để
-        hiển thị đúng trang, tạm thời ta
-        hiển thị trang Tổng Quan
-      */}
-      <TongQuan /> 
+      {
+      
+      <BanHang />
+      }
+      {/* <TongQuan /> */}
 
       <Footer />
     </div>

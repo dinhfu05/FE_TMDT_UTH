@@ -1,1 +1,0 @@
-dùng để chứa header bar, nav bar, footer , ... các cái dùng nhiều lần

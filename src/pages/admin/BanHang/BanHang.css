@@ -1,0 +1,279 @@
+/* Lấy lại style chung cho nội dung chính và breadcrumb */
+.noi_dung_chinh {
+    flex: 1;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 30px;
+    width: 100%;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+.breadcrumb a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* ===============================================
+  CSS TRANG BÁN HÀNG
+===============================================
+*/
+
+/* Tóm tắt đơn hàng */
+.tom_tat_don_hang {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+
+.tom_tat_item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-trang-thai {
+    font-size: 24px;
+    color: var(--text-secondary);
+}
+
+.tom_tat_chi_tiet {
+    display: flex;
+    flex-direction: column;
+}
+
+.tom_tat_chi_tiet strong {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.tom_tat_chi_tiet span {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Bộ lọc đơn hàng */
+.bo_loc_don_hang {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.thanh_tim_kiem_lon {
+    flex: 1; 
+    min-width: 300px; 
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    border-radius: 8px;
+}
+
+.thanh_tim_kiem_lon i {
+    color: var(--text-secondary);
+    margin-right: 10px;
+}
+
+.thanh_tim_kiem_lon input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+}
+
+.nhom_bo_loc {
+    display: flex;
+    gap: 15px;
+}
+
+.bo_loc_dropdown {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+
+.danh_sach_don_hang {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.the_don_hang {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow: hidden; 
+}
+
+.don_hang__dau_the {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.trang_thai {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.trang_thai--cho_xu_ly {
+    background-color: var(--color-cho-xu-ly-bg);
+    color: var(--color-cho-xu-ly-text);
+}
+.trang_thai--dang_xu_ly {
+    background-color: var(--color-dang-xu-ly-bg);
+    color: var(--color-dang-xu-ly-text);
+}
+.trang_thai--dang_giao {
+    background-color: var(--color-dang-giao-bg);
+    color: var(--color-dang-giao-text);
+}
+
+.don_hang__thong_tin {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.don_hang__thong_tin span {
+    color: var(--text-secondary);
+}
+.don_hang__thong_tin strong {
+    color: var(--primary-color);
+}
+.gia_tien {
+    color: var(--color-dang-giao-text) !important; 
+    font-size: 16px;
+}
+
+/* Danh sách sản phẩm trong đơn */
+.don_hang__san_pham_list {
+    padding: 0 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.san_pham_item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.san_pham_item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    object-fit: cover;
+}
+.san_pham_item__chi_tiet {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+.san_pham_item__chi_tiet span:last-child {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+
+.don_hang__hanh_dong {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+    padding: 15px 20px;
+    background-color: #f9fafb; 
+}
+
+.nut_hanh_dong {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+.nut_hanh_dong:hover {
+    opacity: 0.8;
+}
+.nut_hanh_dong i {
+    font-size: 13px;
+}
+
+.nut--chinh {
+    background-color: var(--nut-chinh-bg);
+    color: var(--nut-chinh-text);
+}
+.nut--phu {
+    background-color: var(--nut-phu-bg);
+    color: var(--nut-phu-text);
+    border: 1px solid var(--border-color);
+}
+.nut--huy {
+    background-color: var(--nut-huy-bg);
+    color: var(--nut-huy-text);
+}
+
+
+.phan_trang {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+}
+.phan_trang a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: background-color 0.3s, color 0.3s;
+}
+.phan_trang a:hover {
+    background-color: var(--card-bg);
+    color: var(--primary-color);
+}
+.phan_trang a.trang_hien_tai {
+    background-color: var(--nut-chinh-bg);
+    color: var(--nut-chinh-text);
+    font-weight: 600;
+}
+.phan_trang a.nut_dieu_huong {
+    font-size: 12px;
+}
