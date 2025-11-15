@@ -32,7 +32,9 @@ const Header = () => {
           </li>
 
           <li>
-            <a href="#" style={{ opacity: 0.5, cursor: 'not-allowed' }}>Kho</a>
+            <NavLink to="/kho" className={getNavLinkClass}>
+              Kho
+            </NavLink>
           </li>
 
           <li>

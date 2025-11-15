@@ -6,6 +6,7 @@ import AdminLayout from '../../layout/admin/AdminLayout';
 import TongQuan from '../../pages/admin/TongQuan/TongQuan';
 import BanHang from '../../pages/admin/BanHang/BanHang';
 import Khach from '../../pages/admin/Khach/Khach';
+import Kho from '../../pages/admin/Kho/Kho';
 
 const AdminRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AdminRoutes = () => {
         <Route path="tong-quan" element={<TongQuan />} />
         <Route path="ban-hang" element={<BanHang />} />
         <Route path="khach" element={<Khach />} />
+        <Route path="kho" element={<Kho />} />
 
       </Route>
     </Routes>
