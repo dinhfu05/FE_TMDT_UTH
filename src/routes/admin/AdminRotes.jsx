@@ -7,6 +7,7 @@ import TongQuan from '../../pages/admin/TongQuan/TongQuan';
 import BanHang from '../../pages/admin/BanHang/BanHang';
 import Khach from '../../pages/admin/Khach/Khach';
 import Kho from '../../pages/admin/Kho/Kho';
+import Marketing from '../../pages/admin/Marketing/Marketing';
 
 const AdminRoutes = () => {
   return (
@@ -17,7 +18,7 @@ const AdminRoutes = () => {
         <Route path="ban-hang" element={<BanHang />} />
         <Route path="khach" element={<Khach />} />
         <Route path="kho" element={<Kho />} />
-
+        <Route path="marketing" element={<Marketing />} />
       </Route>
     </Routes>
   );

@@ -38,7 +38,9 @@ const Header = () => {
           </li>
 
           <li>
-            <a href="#" style={{ opacity: 0.5, cursor: 'not-allowed' }}>Marketing</a>
+            <NavLink to="/marketing" className={getNavLinkClass}>
+              Marketing
+            </NavLink>
           </li>
 
           <li>
