@@ -1,10 +1,6 @@
 import React from 'react';
-import './BanHang.css'; // Import file CSS riêng của trang này
+import './BanHang.css'; 
 
-// GIẢ SỬ bạn đã chép ảnh vào thư mục 'src/assets/images/'
-// Bạn sẽ cần import chúng như thế này:
-// import aoImg from '../../../assets/images/ao(8).png';
-// import quanJeanImg from '../../../assets/images/Quan_jean.png';
 
 const BanHang = () => {
   return (

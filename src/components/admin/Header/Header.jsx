@@ -1,5 +1,11 @@
 import React from 'react';
-import './Header.css'; 
+import { NavLink } from 'react-router-dom';
+import './Header.css';
+
+
+const getNavLinkClass = ({ isActive }) => {
+  return isActive ? 'dang_chon' : '';
+};
 
 const Header = () => {
   return (
@@ -7,12 +13,37 @@ const Header = () => {
       <div className="header__logo">Tenbrand</div>
       <nav className="header__dieu_huong">
         <ul>
-          <li ><a href="index.html">Tổng quan</a></li>
-          <li className="dang_chon"><a href="Ban_hang.html">Bán hàng</a></li>
-          <li><a href="Khach.html">Khách</a></li>
-          <li><a href="Kho.html">Kho</a></li>
-          <li><a href="Marketing.html">Marketing</a></li>
-          <li><a href="BaoCao.html">Báo cáo</a></li>
+          <li >
+            <NavLink to="/tong-quan" className={getNavLinkClass}>
+              Tổng quan
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/ban-hang" className={getNavLinkClass}>
+              Bán hàng
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/khach" className={getNavLinkClass}>
+              Khách
+            </NavLink>
+          </li>
+
+          <li>
+            <a href="#" style={{ opacity: 0.5, cursor: 'not-allowed' }}>Kho</a>
+          </li>
+
+          <li>
+            <a href="#" style={{ opacity: 0.5, cursor: 'not-allowed' }}>Marketing</a>
+          </li>
+
+          <li>
+            <a href="#" style={{ opacity: 0.5, cursor: 'not-allowed' }}>Báo cáo</a>
+          </li>
+
+
         </ul>
       </nav>
       <div className="header__hanh_dong">

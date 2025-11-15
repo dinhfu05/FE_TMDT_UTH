@@ -24,10 +24,10 @@
     color: var(--text-secondary);
     padding: 10px;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: all 0.2s ease-in-out;
 }
 
-.header__dieu_huong li.dang_chon a {
+.header__dieu_huong a.dang_chon {
     color: var(--primary-color);
     font-weight: 600;
 }
