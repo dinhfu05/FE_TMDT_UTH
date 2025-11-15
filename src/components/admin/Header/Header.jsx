@@ -44,7 +44,9 @@ const Header = () => {
           </li>
 
           <li>
-            <a href="#" style={{ opacity: 0.5, cursor: 'not-allowed' }}>Báo cáo</a>
+            <NavLink to="/bao-cao" className={getNavLinkClass}>
+              Báo cáo
+            </NavLink>
           </li>
 
 

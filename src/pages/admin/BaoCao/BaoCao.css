@@ -1,0 +1,161 @@
+/* ----- Style chung cho các trang ----- */
+.noi_dung_chinh {
+    flex: 1;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 30px;
+    width: 100%;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+.breadcrumb a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Class 'xem_them' dùng chung */
+.xem_them {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3b82f6; 
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.xem_them:hover {
+    text-decoration: underline;
+}
+.xem_them i {
+    font-size: 12px;
+}
+
+/* ===============================================
+  CSS RIÊNG CHO TRANG BÁO CÁO
+===============================================
+*/
+
+.luoi_bao_cao {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.the_bao_cao {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.the_bao_cao__dau_the {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.the_bao_cao__dau_the h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.the_bao_cao__dau_the h3 i {
+    color: #3b82f6; /* Màu xanh dương */
+}
+
+.the_bao_cao__noi_dung {
+    padding: 30px 20px;
+}
+
+/* Phần biểu đồ */
+.khu_vuc_bieu_do {
+    display: flex;
+    justify-content: space-around;
+    height: 300px; 
+    border-bottom: 2px solid var(--bg-color); 
+    padding: 0 10px;
+    align-items: flex-end; /* Căn các cột xuống dưới */
+}
+
+.bieu_do__cot_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    height: 100%; 
+    justify-content: flex-end; /* Đẩy cột và nhãn xuống dưới */
+}
+
+.bieu_do__cot {
+    width: 60%; 
+    max-width: 50px;
+    background-image: linear-gradient(to top, #6a5af9, #d66efd);
+    border-radius: 6px 6px 0 0;
+    transition: height 0.5s ease-out;
+}
+
+.bieu_do__nhan {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Phần sản phẩm bán chạy */
+.danh_sach_ban_chay {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.san_pham_item_nho {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.san_pham_item_nho img {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: #eee; 
+    object-fit: cover;
+    flex-shrink: 0; 
+}
+
+.san_pham_item_nho__thong_tin {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.san_pham_item_nho__thong_tin span:first-child {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--primary-color);
+}
+.san_pham_item_nho__thong_tin .phu_de {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 900px) {
+    .luoi_bao_cao {
+        grid-template-columns: 1fr; 
+    }
+}

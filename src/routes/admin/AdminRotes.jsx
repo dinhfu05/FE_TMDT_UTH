@@ -8,6 +8,7 @@ import BanHang from '../../pages/admin/BanHang/BanHang';
 import Khach from '../../pages/admin/Khach/Khach';
 import Kho from '../../pages/admin/Kho/Kho';
 import Marketing from '../../pages/admin/Marketing/Marketing';
+import BaoCao from '../../pages/admin/BaoCao/BaoCao';
 
 const AdminRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AdminRoutes = () => {
         <Route path="khach" element={<Khach />} />
         <Route path="kho" element={<Kho />} />
         <Route path="marketing" element={<Marketing />} />
+        <Route path="bao-cao" element={<BaoCao/>} />
       </Route>
     </Routes>
   );
