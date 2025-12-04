@@ -4,7 +4,7 @@ import './BanHang.css';
 
 const BanHang = () => {
   return (
-    <main className="noi_dung_chinh"> {/* <-- Chỉ lấy từ <main> */}
+    <main className="noi_dung_chinh"> 
       <nav className="breadcrumb">
         <a href="index.html">Trang chủ</a> / <span>Bán hàng</span>
       </nav>
@@ -84,7 +84,7 @@ const BanHang = () => {
           </div>
           <div className="don_hang__thong_tin">
             <div>
-              <span>Khách hàng: <strong>Vũ Quốc Huy</strong></span>
+              <span>Khách hàng: <strong>Võ Quốc Huy</strong></span>
               <span>Ngày đặt: <strong>2/2/2025 - 3:00</strong></span>
             </div>
             <div>
@@ -94,16 +94,14 @@ const BanHang = () => {
           </div>
           <div className="don_hang__san_pham_list">
             <div className="san_pham_item">
-              {/* <img src={aoImg} alt="Sản phẩm" /> */}
-              <img src={"./Picture/ao(8).png"} alt="Sản phẩm" /> {/* Tạm thời để link cũ, nhưng nó sẽ lỗi */}
+              <img src={"./Picture/ao(8).png"} alt="Sản phẩm" />
               <div className="san_pham_item__chi_tiet">
                 <span>Áo</span>
                 <span>Số lượng: 1 x 250.000đ</span>
               </div>
             </div>
             <div className="san_pham_item">
-              {/* <img src={quanJeanImg} alt="Sản phẩm" /> */}
-              <img src={"./Picture/Quan_jean.png"} alt="Sản phẩm" /> {/* Tạm thời để link cũ */}
+              <img src={"./Picture/Quan_jean.png"} alt="Sản phẩm" />
               <div className="san_pham_item__chi_tiet">
                 <span>Quần jean</span>
                 <span>Số lượng: 1 x 300.000đ</span>
@@ -125,7 +123,7 @@ const BanHang = () => {
           </div>
           <div className="don_hang__thong_tin">
             <div>
-              <span>Khách hàng: <strong>Vũ Quốc Huy</strong></span>
+              <span>Khách hàng: <strong>Võ Quốc Huy</strong></span>
               <span>Ngày đặt: <strong>2/2/2025 - 3:00</strong></span>
             </div>
             <div>
@@ -148,7 +146,7 @@ const BanHang = () => {
           </div>
           <div className="don_hang__thong_tin">
             <div>
-              <span>Khách hàng: <strong>Vũ Quốc Huy</strong></span>
+              <span>Khách hàng: <strong>Võ Quốc Huy</strong></span>
               <span>Ngày đặt: <strong>2/2/2025 - 3:00</strong></span>
             </div>
             <div>

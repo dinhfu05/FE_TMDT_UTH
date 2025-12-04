@@ -1,4 +1,4 @@
-/* Lấy lại style chung cho nội dung chính và breadcrumb */
+
 .noi_dung_chinh {
     flex: 1;
     max-width: 1200px;
@@ -25,7 +25,6 @@
 ===============================================
 */
 
-/* Tóm tắt đơn hàng */
 .tom_tat_don_hang {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
