@@ -289,7 +289,7 @@ const MyOrdersPage = () => {
 
                   <button
                     onClick={() =>  navigate(`/product/${item.productId}`, { state: { product: item } })}
-                    className="border border-red-500 text-red-500 px-4 py-1 rounded-lg text-sm font-medium hover:bg-red-50 transition"
+                    className="border border-green-500 text-green-600 px-4 py-1 rounded-lg text-sm font-medium hover:bg-red-50 transition"
                   >
                     Mua lại
                   </button>
@@ -471,7 +471,7 @@ const MyOrdersPage = () => {
                             Hủy
                           </button>
                           <button
-                            onClick={handleCancelOrder(detail.orderId)}
+                            onClick={() => handleCancelOrder(detail.orderId)}
                             className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-800 transition"
                           >
                             Xác nhận
