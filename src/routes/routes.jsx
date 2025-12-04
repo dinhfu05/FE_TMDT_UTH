@@ -13,6 +13,12 @@ import ProductDetailPage from "../pages/customer/ProductDetailPage";
 import BuyNowPage from "../pages/customer/BuyNowPage";
 import NewsPage from "../pages/customer/NewsPage";
 import AboutPage from "../pages/customer/AboutPage";
+import TongQuan from "../pages/admin/Tongquan";
+import Marketing from "../pages/admin/Marketing/Marketing";
+import Kho from "../pages/admin/Kho/Kho";
+import Khach from "../pages/admin/Khach/Khach";
+import BaoCao from "../pages/admin/BaoCao/BaoCao";
+import BanHang from "../pages/admin/BanHang/BanHang";
 // Admin pages
 // import AdminDashboard from "../pages/admin/AdminDashboard";
 
@@ -33,7 +39,13 @@ const routes = [
       />
     ),
     children: [
-      // { index: true, element: <AdminDashboard /> },
+      {index: true, element: <TongQuan />},
+      {path: "marketing", element: <Marketing />},
+      {path: "kho", element: <Kho />},
+      {path: "khach", element: <Khach />},
+      {path: "bao-cao", element: <BaoCao />},
+      {path: "ban-hang", element: <BanHang />},
+      {path: "*", element: <Navigate to="/admin" replace />},
     ],
   },
 

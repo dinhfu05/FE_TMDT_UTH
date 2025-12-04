@@ -2,162 +2,203 @@
 export const newsData = [
   {
     id: 1,
-    date: "05/04/2025",
-    title: "SPRING COLLECTION 2025 - BỘ SƯU TẬP XUÂN MỚI",
-    summary: "Khám phá bộ sưu tập Xuân 2025 với những thiết kế rực rỡ, màu sắc tươi mới và phong cách hiện đại...",
-    imageUrl: "https://i.pinimg.com/736x/c5/ef/14/c5ef14f0be70dcb93efbc7c661e7793b.jpg",
-    link: "/news/spring-collection-2025",
+    date: "24/11/2025",
+    title: "COOLMATE CHÍNH THỨC KÍCH HOẠT CHƯƠNG TRÌNH BLACK FRIDAY 2025",
+    summary:
+      "Tháng 11 hằng năm luôn là thời điểm sôi động nhất của mùa mua sắm, và Black Friday là sự kiện được chờ đợi nhất.",
+    imageUrl:
+      " https://www.coolmate.me/blog/wp-content/uploads/2025/11/thumb-1024x536.jpg ",
+    link: " https://www.coolmate.me/blog/coolmate-chinh-thuc-kich-hoat-chuong-trinh-black-friday-2025 ",
   },
   {
     id: 2,
-    date: "20/12/2024",
-    title: "SALE CUỐI NĂM - GIẢM GIÁ LÊN ĐẾN 50%",
-    summary: "Chương trình Khuyến mãi lớn nhất trong năm đã bắt đầu!...",
-    imageUrl: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=250&fit=crop&q=80",
-    link: "/news/sale-cuoi-nam-50-percent",
+    date: "19/11/2025",
+    title: " Phối Đồ Với Quần Ống Rộng Mùa Đông: Ấm Áp, Sành Điệu Nam Nữ",
+    summary:
+      "Mùa đông đến, đừng vội cất những chiếc quần ống rộng yêu thích. Thiết kế này hoàn toàn có thể trở thành một giải pháp thời trang, giúp bạn duy trì sự ấm áp đồng thời vẫn giữ được vẻ sành điệu....",
+    imageUrl:
+      " https://www.coolmate.me/blog/wp-content/uploads/2025/11/phoi-do-voi-quan-ong-rong-mua-dong-1-1024x768.jpg ",
+    link: " https://www.coolmate.me/blog/phoi-do-voi-quan-ong-rong-mua-dong ",
   },
   {
     id: 3,
-    date: "15/10/2024",
-    title: "HƯỚNG DẪN PHỐI ĐỒ THỜI TRANG MÙA ĐÔNG",
-    summary: "Mùa đông đã đến. Cùng Tenbrand khám phá những cách phối đồ thông minh...",
-    imageUrl: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=250&fit=crop&q=80",
-    link: "/news/huong-dan-phoi-do-mua-dong",
+    date: "15/10/2025",
+    title: "Vải Spandex là gì? A đến Z về vải Spandex",
+    summary:
+      "Vải Spandex là chất liệu cao cấp trong ngành dệt may, mang đến khả năng...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/11/vai-spandex-la-gi-1-1024x768.jpg",
+    link: "https://www.coolmate.me/blog/vai-spandex-la-gi-a-den-z-ve-vai-spandex ",
   },
   {
     id: 4,
-    date: "10/10/2025",
-    title: "TENBRAND TUYỂN DỤNG TEAM LEAD MARKETING",
-    summary: "Với mục tiêu phát triển mạnh mẽ, Tenbrand đang tìm kiếm Team Lead Marketing...",
-    imageUrl: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop&q=80",
-    link: "/news/tuyen-dung-marketing-lead",
+    date: "17/10/2025",
+    title: "Bỏ Túi Ngay 15+ Shop Quần Áo Mùa Đông Đẹp & Uy Tín Trên Shopee!",
+    summary:
+      "Khi mùa đông gõ cửa, hành trình tìm kiếm những bộ cánh ấm áp mà vẫn sành điệu trên Shopee lại bắt đầu. ...",
+    imageUrl:
+      " https://www.coolmate.me/blog/wp-content/uploads/2025/11/shop-ban-quan-ao-mua-dong-dep-tren-shopee-768x402.jpg",
+    link: "https://vinwonders.com/vi/wonderpedia/news/dia-diem-chup-hinh-dep-o-sai-gon/",
   },
   {
     id: 5,
     date: "05/09/2024",
-    title: "SAO VIỆT VÀ PHONG CÁCH THỜI TRANG TENBRAND",
-    summary: "Khám phá tủ đồ hàng hiệu của các diễn viên, ca sĩ nổi tiếng...",
-    imageUrl: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=250&fit=crop&q=80",
-    link: "/news/sao-viet-phong-cach",
+    title:
+      "Cách Phối Đồ Cho Người Gầy Vào Mùa Đông: Hack Dáng Đầy Đặn, Tự Tin Lên Đồ!",
+    summary:
+      "Mùa đông lạnh giá thường là nỗi ám ảnh với những ai sở hữu vóc dáng mảnh mai. Làm sao để vừa giữ ấm, vừa hack dáng trông đầy đặn, cân đối mà vẫn thật thời trang? ...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/11/cach-phoi-do-cho-nguoi-gay-vao-mua-dong-768x402.jpg",
+    link: " https://www.coolmate.me/blog/cach-phoi-do-cho-nguoi-gay-vao-mua-dong ",
   },
   {
     id: 6,
-    date: "28/08/2024",
-    title: "KHAI TRƯƠNG CHI NHÁNH MỚI TẠI TP. HỒ CHÍ MINH",
-    summary: "Tenbrand chính thức khai trương chi nhánh flagship mới tại Quận 1...",
-    imageUrl: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&h=250&fit=crop&q=80",
-    link: "/news/khai-truong-hcm",
+    date: "28/10/2025",
+    title: "Phối đồ nam mùa đông Hàn Quốc: Bí kíp mặc ấm, sành điệu",
+    summary:
+      "Tenbrand chính thức khai trương chi nhánh flagship mới tại Quận 1...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/10/phoi-do-nam-mua-dong-han-quoc-0-768x402.jpg",
+    link: " https://www.coolmate.me/blog/phoi-do-nam-mua-dong-han-quoc-am-ap ",
   },
   {
     id: 7,
-    date: "15/07/2024",
-    title: "NGUYÊN TẮC PHỐI MÀU CƠ BẢN CHO NGƯỜI MỚI",
-    summary: "Tìm hiểu các nguyên tắc phối màu cơ bản như tương phản, đơn sắc...",
-    imageUrl: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=250&fit=crop&q=80",
-    link: "/news/nguyen-tac-phoi-mau",
+    date: "15/07/2025",
+    title: "BST Burberry Xuân Hè 2026: Di sản vang vọng trong khúc ca hè",
+    summary:
+      "Mới đây, BST Burberry xuân hè 2026 đã chính thức trình làng mở ra bản hòa ca của thời trang và âm nhạc....",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/09/BST-Burberry-Xuan-He-2026-768x402.jpg",
+    link: " https://www.coolmate.me/blog/bst-burberry-xuan-he-2026-di-san-vang-vong-trong-khuc-ca-he ",
   },
   {
     id: 8,
-    date: "01/06/2024",
-    title: "SUMMER HOT SALE - ĐỒNG GIÁ ÁO PHÔNG 199K",
-    summary: "Chương trình khuyến mãi mùa hè cực kỳ hấp dẫn...",
-    imageUrl: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&h=250&fit=crop&q=80",
-    link: "/news/summer-hot-sale",
+    date: "01/10/2025",
+    title: "Charles & Keith ra mắt chiến dịch “Flat White Hours” tại TP.HCM",
+    summary:
+      "Flat White Hours: Wander Wild – lời mời gọi đến với bữa tiệc của cảm xúc với những giây phút lắng đọng và đầy ý nghĩa từ Charles & Keith....",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/09/Flat-White-Hours-Wander-Wild-768x402.jpg",
+    link: "https://www.coolmate.me/blog/charles-keith-ra-mat-chien-dich-flat-white-hours-tai-tp-hcm ",
   },
   {
     id: 9,
     date: "10/05/2024",
-    title: "XU HƯỚNG JEANS VÀ DENIM THỐNG TRỊ 2024",
-    summary: "Jeans và Denim vẫn là chất liệu không thể thiếu...",
-    imageUrl: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=250&fit=crop&q=80",
-    link: "/news/xu-huong-denim",
+    title:
+      "BST Diesel Xuân Hè 2026: Truy tìm “trứng Phục Sinh” giữa Milan hoa lệ",
+    summary:
+      "Trên đường đua ra mắt bộ sưu tập cho xuân hè 2026, Diesel cũng không phải ngoại lệ khi ra mắt bộ sưu tập mới theo cách độc lạ. ...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/09/BST-Diesel-Xuan-He-2026-768x402.jpg",
+    link: "https://www.coolmate.me/blog/bst-diesel-xuan-he-2026-truy-tim-trung-phuc-sinh-giua-milan-hoa-le",
   },
   {
     id: 10,
-    date: "25/04/2024",
-    title: "REVIEW CHẤT LƯỢNG VẢI ECO-FRIENDLY TẠI TENBRAND",
-    summary: "Tenbrand cam kết sử dụng chất liệu thân thiện với môi trường...",
-    imageUrl: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=250&fit=crop&q=80",
-    link: "/news/review-vai-eco",
+    date: "25/04/2025",
+    title: "RTop 6 Xu Hướng Màu Sắc Thu Đông 2025: Bật Cá Tính Cùng Coolmate!",
+    summary:
+      "Mùa đông đang đến gần, bạn đã sẵn sàng F5 tủ đồ với xu hướng màu sắc thu đông 2025 chưa?....",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/09/xu-huong-mau-sac-thu-dong-2025-768x402.jpg",
+    link: "https://www.coolmate.me/blog/top-6-xu-huong-mau-sac-thu-dong-2025 ",
   },
   {
     id: 11,
-    date: "05/03/2024",
-    title: "CÁCH BẢO QUẢN ĐỒ DA CAO CẤP LUÔN NHƯ MỚI",
-    summary: "Hướng dẫn chi tiết từ A đến Z cách vệ sinh, làm sạch và bảo quản...",
-    imageUrl: "https://cdn.tgdd.vn/Files/2021/11/19/1398996/chi-tiet-cach-bao-quan-do-da-ben-lau-khong-bi-moc-202111191417552786.jpg",
-    link: "/news/bao-quan-do-da",
+    date: "05/03/2025",
+    title: "Devil Wears Prada 2” dự báo gì cho xu hướng thời trang 2026?",
+    summary:
+      "Hàng loạt đồn đoán liên quan đến sự trở lại của Devil Wears Prada phần 2 sẽ ra mắt trong thời gian tới sau khi hình ảnh các diễn viên lan truyền trên mạng xã hội...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/09/Devil-Wears-Prada-2-768x402.jpg",
+    link: "https://www.coolmate.me/blog/devil-wears-prada-2-du-bao-gi-cho-xu-huong-thoi-trang-2026 ",
   },
   {
     id: 12,
     date: "15/02/2024",
-    title: "VALENTINE'S DAY - ƯU ĐÃI ĐẶC BIỆT CHO CẶP ĐÔI",
-    summary: "Giảm ngay 15% khi mua sản phẩm đôi hoặc hai sản phẩm bất kỳ...",
-    imageUrl: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=250&fit=crop&q=80",
-    link: "/news/valentine-day-promo",
+    title: "Year End Sale cuối năm – Giảm 50% khi mua từ sản phẩm thứ 2 ",
+    summary: "Giảm ngay 50% khi mua sản phẩm đôi hoặc hai sản phẩm bất kỳ...",
+    imageUrl:
+      "https://n7media.coolmate.me/image/December2024/thumb-year-end-sale-blog.jpg",
+    link: "https://www.coolmate.me/blog/year-end-sale-giam-50-khi-mua-tu-san-pham-thu-hai-4308",
   },
   {
     id: 13,
-    date: "01/01/2025",
-    title: "TENBRAND CHÚC MỪNG NĂM MỚI GIÁP THÌN 2025",
-    summary: "Lời chúc tốt đẹp nhất từ đội ngũ Tenbrand gửi đến quý khách hàng...",
-    imageUrl: "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=400&h=250&fit=crop&q=80",
-    link: "/news/chuc-mung-nam-moi",
+    date: "1/12/2024",
+    title: " 12/12 là ngày gì? Tất tần tật thông tin về Ngày hội sale 12/12",
+    summary:
+      " Tháng 12 đến, báo hiệu một mùa Giáng sinh an lành và ấm áp sắp đến. Cùng với đó là không khí mua sắm nhộn nhịp với những chương trình khuyến mãi, giảm giá hấp dẫn. .",
+    imageUrl:
+      "https://n7media.coolmate.me/image/November2024/12-12-la-ngay-gi-tat-tan-tat-thong-tin-ve-ngay-hoi-sale-12-12_859.jpg",
+    link: " https://www.coolmate.me/blog/12-12-la-ngay-gi-tat-tan-tat-thong-tin-ve-ngay-hoi-sale-12-12-4589",
   },
   {
     id: 14,
     date: "10/11/2024",
-    title: "BLACK FRIDAY 2024 - CƠN LỐC GIẢM GIÁ KHỦNG",
-    summary: "Cập nhật sớm nhất các deal hot nhất Black Friday...",
-    imageUrl: "https://images.unsplash.com/photo-1607083206325-caf1edba7a0f?w=400&h=250&fit=crop&q=80",
-    link: "/news/black-friday-2024",
+    title:
+      " Double Day là ngày gì? Săn sale double day cùng Coolmate có gì hấp dẫn?",
+    summary:
+      "Double Day – ngày hội sale của hàng loạt thương hiệu, trong đó có cả Coolmate. Bạn đã sẵn sàng săn sale với nhiều sản phẩm chất lượng từ Coolmate chưa?,…",
+    imageUrl: " https://n7media.coolmate.me/image/October2024/Coolmate.jpg ",
+    link: " https://www.coolmate.me/blog/double-day-la-ngay-gi-san-sale-double-day-cung-coolmate-4145 ",
   },
   {
     id: 15,
     date: "22/09/2024",
-    title: "PHONG CÁCH STREETWEAR ĐANG ĐỊNH HÌNH THỜI TRANG",
-    summary: "Tìm hiểu về nguồn gốc và sự phát triển của phong cách Streetwear...",
-    imageUrl: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=250&fit=crop&q=80",
-    link: "/news/phong-cach-streetwear",
+    title: "Garage sale là gì? Vì sao garage sale lại thu hút giới trẻ",
+    summary:
+      "Garage Sale – khái niệm mà hiện nay, giới trẻ đang rần rần nhắc đến. Nhưng tại sao một sự kiện bình thường như bán đồ cũ lại trở thành một cơn sốt thu hút đám đông? ...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/09/garage-sale-la-gi-3225-768x576.jpg",
+    link: "https://www.coolmate.me/blog/garage-sale-la-gi-3225 ",
   },
   {
     id: 16,
     date: "05/08/2024",
-    title: "BÍ QUYẾT CHỌN SIZE QUẦN ÂU NAM CHUẨN NHƯ MAY ĐO",
-    summary: "Hướng dẫn chi tiết cách đo và chọn size quần tây nam...",
-    imageUrl: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=250&fit=crop&q=80",
-    link: "/news/chon-size-quan-au",
+    title: "Cách Phối Đồ Mùa Đông Với Quần Jean: Sành Điệu, Ấm Áp Nam Nữ",
+    summary:
+      "Mùa đông đến, chiếc quần jean vẫn là item không thể thiếu. Nhưng làm sao để phối đồ vừa ấm, vừa sành điệu mà không luộm thuộm? ...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/11/cach-phoi-do-mua-dong-voi-quan-jean-0-768x402.jpg",
+    link: "https://www.coolmate.me/blog/cach-phoi-do-mua-dong-voi-quan-jean ",
   },
   {
     id: 17,
-    date: "15/07/2024",
-    title: "TENBRAND RA MẮT DÒNG PHỤ KIỆN DA CAO CẤP",
-    summary: "Bộ sưu tập phụ kiện mới bao gồm ví da, thắt lưng và túi xách...",
-    imageUrl: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&h=250&fit=crop&q=80",
-    link: "/news/phu-kien-da-cao-cap",
+    date: "15/07/2025",
+    title: " Top quần jogger nam mùa đông Coolmate Giữ ấm và thời trang",
+    summary:
+      "Không chỉ là item thể thao, top quần jogger nam mùa đông Coolmate còn là biểu tượng của phong cách năng động và hiện đại. ..",
+    imageUrl:
+      " https://www.coolmate.me/blog/wp-content/uploads/2025/11/top-quan-jogger-nam-mua-dong-coolmate-0-768x402.jpg",
+    link: " https://www.coolmate.me/blog/top-quan-jogger-nam-mua-dong-coolmate ",
   },
   {
     id: 18,
-    date: "01/06/2024",
-    title: "CHƯƠNG TRÌNH TRI ÂN KHÁCH HÀNG THÂN THIẾT (VIP)",
-    summary: "Ưu đãi độc quyền dành cho khách hàng VIP...",
-    imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&q=80",
-    link: "/news/chuong-trinh-vip",
+    date: "01/11/2025",
+    title: "Các mẫu đồ nam mùa đông mới ra mắt Coolmate đáng sở hữu",
+    summary:
+      "Mùa đông là thời điểm lý tưởng để phái mạnh làm mới tủ đồ của mình với những thiết kế hiện đại và thời trang...",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/11/top-quan-jean-nam-mua-dong-coolmate-0-768x402.jpg",
+    link: " https://www.coolmate.me/blog/top-quan-jean-nam-mua-dong-coolmate",
   },
   {
     id: 19,
-    date: "20/05/2024",
-    title: "PHÂN BIỆT CÁC LOẠI VẢI CƠ BẢN TRONG THỜI TRANG",
-    summary: "Tìm hiểu sự khác nhau giữa cotton, polyester, linen, lụa...",
-    imageUrl: "https://app.gak.vn/storage/uploads/RDgmYupGiLbSpGuyh2xW89mM7HPq0rkqtiCrBaOX.jpg?w=400&h=250&fit=crop&q=80",
-    link: "/news/phan-biet-cac-loai-vai",
+    date: "3/11/2025",
+    title: "Các mẫu áo mùa đông nam Coolmate chuẩn phong cách, giữ ấm",
+    summary:
+      "Mùa đông đến cũng là lúc phái mạnh cần làm mới tủ đồ của mình với những chiếc áo vừa ấm vừa thời trang....",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/11/cac-mau-ao-mua-dong-nam-coolmate-0-768x402.jpg",
+    link: " https://www.coolmate.me/blog/cac-mau-ao-mua-dong-nam-coolmate ",
   },
   {
     id: 20,
-    date: "08/04/2024",
-    title: "GỢI Ý 5 OUTFIT CÔNG SỞ NỮ THANH LỊCH MÙA HÈ",
-    summary: "Các gợi ý phối đồ đơn giản nhưng hiệu quả...",
-    imageUrl: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=400&h=250&fit=crop&q=80",
-    link: "/news/outfit-cong-so-nu-he",
+    date: "3/11/2025",
+    title: "Top quần legging nữ mùa đông Coolmate giữ ấm, co giãn",
+    summary:
+      "Mùa đông đến cũng là lúc các nàng tìm kiếm một chiếc quần vừa ấm, vừa tôn dáng mà vẫn dễ phối đồ....",
+    imageUrl:
+      "https://www.coolmate.me/blog/wp-content/uploads/2025/11/top-quan-legging-nu-mua-dong-coolmate-0-768x402.jpg",
+    link: " https://www.coolmate.me/blog/top-quan-legging-nu-mua-dong-coolmate ",
   },
 ];

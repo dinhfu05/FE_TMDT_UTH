@@ -58,23 +58,10 @@ const ProductCard = ({ product }) => {
     cream: '#FFFDD0',
     khaki: '#F0E68C',
     olive: '#808000',
-    'light blue': '#60A5FA',
-    'dark blue': '#1E40AF',
-    'multi': '#FFC0CB',         // placeholder cho tie-dye / multi-color
-    'blue print': '#3B82F6',
-    'black print': '#000000',
-    'navy-white': '#1E3A8A',
-    'black-red': '#8B0000',
+    mossgreen: '#353F3A',
+    militarygreen:'#3D463B',
     natural: '#F5F5DC',
     mixed: '#C0C0C0',
-    // Tiếng Việt
-    đen: '#000000',
-    trắng: '#FFFFFF',
-    xám: '#6B7280',
-    xam: '#6B7280',
-    xanh: '#3B82F6',
-    'xanh dương': '#3B82F6',
-    be: '#F5F5DC'
   };
 
   return colorMap[normalized] || '#CCCCCC';
