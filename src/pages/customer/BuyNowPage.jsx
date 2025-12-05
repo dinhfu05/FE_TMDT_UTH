@@ -16,22 +16,18 @@ const BuyNowPage = () => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [loading, setLoading] = useState(false);
 
-
   if (!product) {
     return <div className="text-center py-20">Không có sản phẩm để mua.</div>;
   }
-
 
   const finalPrice =
     product.discount > 0
       ? product.price - (product.price * product.discount) / 100
       : product.price;
 
-  
   const subtotal = finalPrice * product.quantity;
 
-
-  const FREE_SHIP_THRESHOLD = 1000000; 
+  const FREE_SHIP_THRESHOLD = 1000000;
   const SHIPPING_FEE = 30000;
 
   const shippingFee = subtotal >= FREE_SHIP_THRESHOLD ? 0 : SHIPPING_FEE;
@@ -46,7 +42,7 @@ const BuyNowPage = () => {
 
         setAddresses(data);
         if (data.length > 0) setSelectedAddressId(data[0].addressId);
-      // eslint-disable-next-line no-unused-vars
+        // eslint-disable-next-line no-unused-vars
       } catch (err) {
         showError("Không thể tải địa chỉ!");
       }
@@ -54,7 +50,6 @@ const BuyNowPage = () => {
 
     loadAddresses();
   }, []);
-
 
   const handleOrder = async () => {
     if (!selectedAddressId) {
@@ -67,7 +62,7 @@ const BuyNowPage = () => {
     try {
       const orderResult = await orderApi.create({
         addressShippingId: selectedAddressId,
-        paymentMethod, 
+        paymentMethod,
         orderDetailRequestDTOs: [
           {
             productDetailId: product.productDetailId,
@@ -84,19 +79,21 @@ const BuyNowPage = () => {
       const orderInfo = orderResult.data;
       showSuccess(`Đặt hàng thành công! Mã đơn: ${orderInfo.orderId}`);
 
-
       if (paymentMethod === "ZALOPAY") {
-        const res = await fetch("http://localhost:8080/api/zalopay/create-order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            orderId: orderInfo.orderId,
-            description: `THANH TOAN DON HANG #${orderInfo.orderId}`,
-          }),
-        });
+        const res = await fetch(
+          "http://localhost:8080/api/zalopay/create-order",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              orderId: orderInfo.orderId,
+              description: `THANH TOAN DON HANG #${orderInfo.orderId}`,
+            }),
+          }
+        );
 
         const data = await res.json();
 
@@ -108,7 +105,6 @@ const BuyNowPage = () => {
         }
       }
 
-     
       navigate("/my-orders");
     } catch (err) {
       console.error(err);
@@ -122,16 +118,12 @@ const BuyNowPage = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto py-8 px-4">
         <Breadcrumb
-          paths={[
-            { label: "Home", link: "/" },
-            { label: "Buy now" },
-          ]}
+          paths={[{ label: "Home", link: "/" }, { label: "Buy now" }]}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
           {/* LEFT */}
           <div className="lg:col-span-2 space-y-6">
-
             <div className="bg-white p-6 rounded-xl shadow-md">
               <h2 className="text-xl font-bold mb-4">Địa chỉ giao hàng</h2>
 
@@ -140,7 +132,7 @@ const BuyNowPage = () => {
               )}
 
               <div className="space-y-3">
-                {addresses.map(addr => (
+                {addresses.map((addr) => (
                   <label
                     key={addr.addressId}
                     className="flex items-start gap-3 p-3 border rounded-lg cursor-pointer"
@@ -169,7 +161,6 @@ const BuyNowPage = () => {
               paymentMethod={paymentMethod}
               setPaymentMethod={setPaymentMethod}
             />
-
           </div>
 
           {/* RIGHT */}
@@ -180,8 +171,12 @@ const BuyNowPage = () => {
             <div className="flex gap-4">
               <div>
                 <p className="font-semibold">{product.productName}</p>
-                <p className="text-sm text-gray-500">Màu: {product.selectedColor}</p>
-                <p className="text-sm text-gray-500">Size: {product.selectedSize}</p>
+                <p className="text-sm text-gray-500">
+                  Màu: {product.selectedColor}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Size: {product.selectedSize}
+                </p>
                 <p className="text-sm mt-1">Số lượng: {product.quantity}</p>
 
                 {/* GIÁ GỐC + GIÁ GIẢM */}
@@ -208,8 +203,14 @@ const BuyNowPage = () => {
 
               <div className="flex justify-between">
                 <span>Phí vận chuyển</span>
-                <span className={shippingFee === 0 ? "text-green-600 font-semibold" : ""}>
-                  {shippingFee === 0 ? "Miễn phí" : `${shippingFee.toLocaleString("vi-VN")}₫`}
+                <span
+                  className={
+                    shippingFee === 0 ? "text-green-600 font-semibold" : ""
+                  }
+                >
+                  {shippingFee === 0
+                    ? "Miễn phí"
+                    : `${shippingFee.toLocaleString("vi-VN")}₫`}
                 </span>
               </div>
 
@@ -222,7 +223,9 @@ const BuyNowPage = () => {
 
               {shippingFee > 0 && (
                 <p className="text-xs text-gray-500">
-                  Mua thêm {(FREE_SHIP_THRESHOLD - subtotal).toLocaleString("vi-VN")}₫ để được miễn phí vận chuyển 🎁
+                  Mua thêm{" "}
+                  {(FREE_SHIP_THRESHOLD - subtotal).toLocaleString("vi-VN")}₫ để
+                  được miễn phí vận chuyển 🎁
                 </p>
               )}
             </div>

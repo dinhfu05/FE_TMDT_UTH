@@ -1,5 +1,3 @@
-// apiService.js
-
 const API_BASE_URL = "http://localhost:8080/api";
 export const IMAGE_BASE_URL = `http://localhost:8080/api/image`;
 
@@ -21,16 +19,68 @@ export const productService = {
     }
   },
 
-  // Lấy chi tiết sản phẩm (Cập nhật để thêm Authorization Header)
+  // Lấy chi tiết sản phẩm
   getProductById: async (productId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/product/${productId}`, {
-      });
+      const response = await fetch(`${API_BASE_URL}/product/${productId}`);
       const result = await response.json();
       return result.success ? result.data : null;
     } catch (error) {
       console.error("Error fetching product:", error);
       return null;
+    }
+  },
+
+  // Lấy reviews theo productId
+  getProductReviews: async (productId, page = 1, size = 10) => {
+    try {
+      const token = getToken();
+      const headers = { "Content-Type": "application/json" };
+      if (token && token !== "MOCK_TOKEN") {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+      const response = await fetch(
+        `${API_BASE_URL}/product/${productId}/reviews?page=${page}&size=${size}`,
+        { headers }
+      );
+      const result = await response.json();
+      return result.success ? result.data : [];
+    } catch (error) {
+      console.error("Error fetching product reviews:", error);
+      return [];
+    }
+  },
+
+  // --- SỬA LẠI: Gửi data qua Query Params (URL) ---
+  // Swagger ghi là (query) nên ta phải append vào URL thay vì body
+  createReview: async (productId, orderDetailId, reviewData) => {
+    try {
+      const token = getToken();
+      if (!token) return { success: false, message: "Vui lòng đăng nhập" };
+
+      // Chuyển object data thành query params
+      const params = new URLSearchParams();
+      if (reviewData.rating) params.append("rating", reviewData.rating);
+      if (reviewData.reviewContent)
+        params.append("reviewContent", reviewData.reviewContent);
+
+      const response = await fetch(
+        `${API_BASE_URL}/product/${productId}/reviews/${orderDetailId}?${params.toString()}`,
+        {
+          method: "POST",
+          headers: {
+            // Không cần Content-Type application/json vì không gửi body
+            Authorization: `Bearer ${token}`,
+          },
+          // Body để trống
+        }
+      );
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error creating review:", error);
+      return { success: false, message: "Lỗi kết nối" };
     }
   },
 };

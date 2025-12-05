@@ -8,7 +8,10 @@ const ProtectedRoute = ({ element, allowedUsers = [] }) => {
 
   // Nếu chưa login
   if (!role || !token) {
-    console.warn("Missing role or token - redirecting to login", { role, token });
+    console.warn("Missing role or token - redirecting to login", {
+      role,
+      token,
+    });
     return <Navigate to="/login" replace />;
   }
 

@@ -1,11 +1,16 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { LayoutDashboard, Users, MessageSquare, BarChart3, Settings } from "lucide-react";
-import Footer from "../components/customer/Footer";
+import {
+  LayoutDashboard,
+  Users,
+  MessageSquare,
+  BarChart3,
+  Settings,
+} from "lucide-react";
+// import Footer from "../components/customer/Footer";
 // import SharedSidebar from "../components/shared/SharedSidebar";
 // import SharedHeader from "../components/shared/SharedHeader";
 // import Sidebar from "../components/admin/Sidebar";
-
 
 const AdminLayout = () => {
   return (

@@ -40,10 +40,7 @@ const CategoryPage = () => {
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 py-4">
         <Breadcrumb
-          paths={[
-            { label: "Home", link: "/" },
-            { label: "Categories" },
-          ]}
+          paths={[{ label: "Home", link: "/" }, { label: "Categories" }]}
         />
       </div>
 
@@ -51,7 +48,7 @@ const CategoryPage = () => {
       <div className="max-w-7xl mx-auto px-4 py-6 text-center">
         <h1 className="text-4xl font-bold mb-3">CATEGORIES</h1>
         <p className="text-gray-600 text-lg">
-         Explore a Wide Range of Products Organized by Category
+          Explore a Wide Range of Products Organized by Category
         </p>
       </div>
 

@@ -9,7 +9,6 @@ const getImageUrl = (filename) => {
   return `${IMAGE_BASE_URL}/${filename}`;
 };
 
-
 const ProfilePage = () => {
   const [formData, setFormData] = useState({});
   const [originalUserName, setOriginalUserName] = useState("");
@@ -76,11 +75,15 @@ const ProfilePage = () => {
     let colorClass = "bg-gray-200 text-black"; // default
 
     if (membership.includes("Bạc")) colorClass = "bg-gray-300 text-black";
-    else if (membership.includes("Vàng")) colorClass = "bg-yellow-400 text-black";
-    else if (membership.includes("Bạch Kim")) colorClass = "bg-slate-300 text-black border border-gray-400";
+    else if (membership.includes("Vàng"))
+      colorClass = "bg-yellow-400 text-black";
+    else if (membership.includes("Bạch Kim"))
+      colorClass = "bg-slate-300 text-black border border-gray-400";
 
     return (
-      <span className={`mt-2 inline-block px-4 py-1 rounded-full text-sm shadow ${colorClass}`}>
+      <span
+        className={`mt-2 inline-block px-4 py-1 rounded-full text-sm shadow ${colorClass}`}
+      >
         {membership}
       </span>
     );
@@ -91,10 +94,7 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen p-8 max-w-7xl mx-auto">
       <Breadcrumb
-        paths={[
-          { label: "Home", link: "/" },
-          { label: "Profile User" },
-        ]}
+        paths={[{ label: "Home", link: "/" }, { label: "Profile User" }]}
       />
 
       {/* Header */}
@@ -177,7 +177,7 @@ const ProfilePage = () => {
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className="border p-2 rounded-lg h-10" 
+              className="border p-2 rounded-lg h-10"
             />
           </div>
 
@@ -188,7 +188,7 @@ const ProfilePage = () => {
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-              className="border p-2 rounded-lg h-10" 
+              className="border p-2 rounded-lg h-10"
             >
               <option value="MALE">Nam</option>
               <option value="FEMALE">Nữ</option>
