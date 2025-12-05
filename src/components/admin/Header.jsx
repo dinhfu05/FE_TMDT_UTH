@@ -1,4 +1,4 @@
- import React from "react";
+import React from "react";
 import { Search, Bell, MessageSquare } from "lucide-react";
 
 export default function Header({ title, subtitle, user }) {
@@ -43,7 +43,9 @@ export default function Header({ title, subtitle, user }) {
           />
           <div className="hidden lg:block text-sm">
             <p className="font-bold">{user?.name || "Admin User"}</p>
-            <p className="text-gray-400 text-xs">{user?.email || "admin@store.com"}</p>
+            <p className="text-gray-400 text-xs">
+              {user?.email || "admin@store.com"}
+            </p>
           </div>
         </div>
       </div>

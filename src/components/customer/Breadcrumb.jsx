@@ -7,7 +7,11 @@ const Breadcrumb = ({ paths }) => {
       {paths.map((path, index) => (
         <span key={index} className="flex items-center gap-1">
           <span
-            className={index === paths.length - 1 ? "font-semibold text-black" : "hover:underline cursor-pointer"}
+            className={
+              index === paths.length - 1
+                ? "font-semibold text-black"
+                : "hover:underline cursor-pointer"
+            }
             onClick={() => path.link && (window.location.href = path.link)}
           >
             {path.label}

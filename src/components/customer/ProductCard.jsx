@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import { cartService, IMAGE_BASE_URL } from '../../services/api/apiService'; 
-import { showError, showSuccess } from '../shared/toast';
-import Button from './Button';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Star } from "lucide-react";
+import {
+  cartService,
+  productService,
+  IMAGE_BASE_URL,
+} from "../../services/api/apiService";
+import { showError, showSuccess } from "../shared/toast";
+import Button from "./Button";
 
 const ProductCard = ({ product }) => {
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
@@ -12,7 +17,54 @@ const ProductCard = ({ product }) => {
   const [showSizePopup, setShowSizePopup] = useState(false);
   const [selectedDetailId, setSelectedDetailId] = useState(null);
 
-  const navigate = useNavigate(); 
+  // State lưu trữ rating: mặc định là 0
+  const [ratingData, setRatingData] = useState({ avgRating: "0.0", count: 0 });
+
+  const navigate = useNavigate();
+
+  // --- LOGIC: Gọi API lấy review để tính trung bình ---
+  useEffect(() => {
+    const fetchReviews = async () => {
+      if (!product?.productId) return;
+
+      // 1. Ưu tiên dùng dữ liệu reviews từ cha truyền vào (nếu có)
+      if (product.reviews && product.reviews.length > 0) {
+        const total = product.reviews.reduce(
+          (acc, r) => acc + Number(r.rating || 0),
+          0
+        );
+        setRatingData({
+          avgRating: (total / product.reviews.length).toFixed(1),
+          count: product.reviews.length,
+        });
+        return;
+      }
+
+      // 2. Nếu không, gọi API để lấy reviews mới nhất
+      try {
+        const reviews = await productService.getProductReviews(
+          product.productId,
+          1,
+          100
+        );
+
+        if (reviews && reviews.length > 0) {
+          const total = reviews.reduce(
+            (acc, r) => acc + Number(r.rating || 0),
+            0
+          );
+          setRatingData({
+            avgRating: (total / reviews.length).toFixed(1),
+            count: reviews.length,
+          });
+        }
+      } catch (err) {
+        console.error("Failed to load rating", err);
+      }
+    };
+
+    fetchReviews();
+  }, [product?.productId, product.reviews]);
 
   const availableColors = product?.productColors || [];
   const safeSelectedColorIndex =
@@ -40,46 +92,42 @@ const ProductCard = ({ product }) => {
   const hasDiscount = discount > 0;
 
   const getColorHex = (colorName) => {
-  if (!colorName) return '#CCCCCC';
-  const normalized = colorName.trim().toLowerCase().replace(/\s+/g, '');
-  
-  const colorMap = {
-    // Cơ bản
-    white: '#FFFFFF',
-    black: '#000000',
-    gray: '#6B7280',
-    grey: '#6B7280',
-    blue: '#3B82F6',
-    lightblue: '#60A5FA',
-    darkblue: '#1E40AF',
-    beige: '#F5F5DC',
-    brown: '#A0522D',
-    navy: '#1E3A8A',
-    cream: '#FFFDD0',
-    khaki: '#F0E68C',
-    olive: '#808000',
-    mossgreen: '#353F3A',
-    militarygreen:'#3D463B',
-    natural: '#F5F5DC',
-    mixed: '#C0C0C0',
+    if (!colorName) return "#CCCCCC";
+    const normalized = colorName.trim().toLowerCase().replace(/\s+/g, "");
+
+    const colorMap = {
+      white: "#FFFFFF",
+      black: "#000000",
+      gray: "#6B7280",
+      grey: "#6B7280",
+      blue: "#3B82F6",
+      lightblue: "#60A5FA",
+      darkblue: "#1E40AF",
+      beige: "#F5F5DC",
+      brown: "#A0522D",
+      navy: "#1E3A8A",
+      cream: "#FFFDD0",
+      khaki: "#F0E68C",
+      olive: "#808000",
+      mossgreen: "#353F3A",
+      militarygreen: "#3D463B",
+      natural: "#F5F5DC",
+      mixed: "#C0C0C0",
+    };
+    return colorMap[normalized] || "#CCCCCC";
   };
-
-  return colorMap[normalized] || '#CCCCCC';
-};
-
 
   const getImageUrl = (filename) => `${IMAGE_BASE_URL}/${filename}`;
 
   const handleAddToCart = async (e) => {
     const detailId = e?.detailId || firstDetailId;
     e?.stopPropagation?.();
-
     const token = localStorage.getItem("token");
+
     if (!token) {
       showError("Vui lòng đăng nhập!");
       return;
     }
-
     if (!detailId) {
       showError("Vui lòng chọn size!");
       return;
@@ -88,7 +136,6 @@ const ProductCard = ({ product }) => {
     setIsAdding(true);
     try {
       const result = await cartService.addToCart(detailId, 1);
-
       if (result.success) {
         showSuccess("Đã thêm vào giỏ!");
         const cartData = await cartService.getCart();
@@ -120,12 +167,12 @@ const ProductCard = ({ product }) => {
     e.stopPropagation();
     setSelectedColorIndex(index);
     setSelectedDetailId(null);
-    setIsColorSelected(true); // Người dùng đã chọn màu
+    setIsColorSelected(true);
   };
 
   const currentImage = isColorSelected
     ? currentColorOption?.productImage || product.productImage
-    : product.productImage; // Mặc định hiển thị ảnh chung
+    : product.productImage;
 
   return (
     <>
@@ -147,9 +194,39 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="font-semibold text-base mb-2 line-clamp-2 min-h-[48px]">
+          <h3 className="font-semibold text-base mb-1 line-clamp-2 min-h-[48px]">
             {product.productName}
           </h3>
+
+          {/* --- HIỂN THỊ RATING: 1 Sao + Điểm số --- */}
+          <div className="flex items-center gap-1.5 mb-3 h-[20px]">
+            {/* Icon Sao: Vàng nếu có đánh giá, Xám nếu chưa */}
+            <Star
+              size={16}
+              className={
+                ratingData.count > 0
+                  ? "text-yellow-400 fill-yellow-400"
+                  : "text-gray-300"
+              }
+            />
+
+            {ratingData.count > 0 ? (
+              <div className="flex items-center pt-0.5">
+                {/* Điểm số: Ví dụ 4.5/5 */}
+                <span className="text-sm font-semibold text-gray-700 mr-1">
+                  {ratingData.avgRating}/5
+                </span>
+                {/* Số lượng đánh giá */}
+                <span className="text-xs text-gray-400">
+                  ({ratingData.count})
+                </span>
+              </div>
+            ) : (
+              <span className="text-xs text-gray-400 pt-0.5">
+                Chưa có đánh giá
+              </span>
+            )}
+          </div>
 
           <div className="flex gap-2 mb-3">
             {availableColors.map((c, i) => (
@@ -216,9 +293,7 @@ const ProductCard = ({ product }) => {
                   key={s.detailId}
                   onClick={() => setSelectedDetailId(s.detailId)}
                   className={`px-4 py-2 border rounded ${
-                    selectedDetailId === s.detailId
-                      ? "bg-black text-white"
-                      : ""
+                    selectedDetailId === s.detailId ? "bg-black text-white" : ""
                   }`}
                 >
                   {s.size}

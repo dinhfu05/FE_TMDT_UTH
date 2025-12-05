@@ -4,7 +4,6 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-14 pb-8">
       <div className="container mx-auto px-4 grid md:grid-cols-4 gap-10">
-
         {/* Brand Info */}
         <div>
           <h3 className="font-semibold mb-3">Tenbrand</h3>

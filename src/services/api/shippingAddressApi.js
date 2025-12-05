@@ -5,8 +5,8 @@ const getHeaders = () => {
   const token = localStorage.getItem("token");
   return {
     "Content-Type": "application/json",
-    "Authorization": token ? `Bearer ${token}` : "",
-    "Accept": "*/*"
+    Authorization: token ? `Bearer ${token}` : "",
+    Accept: "*/*",
   };
 };
 
@@ -21,7 +21,9 @@ const shippingAddressApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message ||s `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -41,7 +43,9 @@ const shippingAddressApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -61,7 +65,9 @@ const shippingAddressApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -80,7 +86,9 @@ const shippingAddressApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();

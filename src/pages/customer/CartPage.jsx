@@ -8,7 +8,7 @@ const CartPage = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [loadingId, setLoadingId] = useState(null);
 
-   const fetchCart = async () => {
+  const fetchCart = async () => {
     const data = await cartService.getCart();
     if (data?.cartItemResponseDTOs) {
       setItems(data.cartItemResponseDTOs);
@@ -20,68 +20,77 @@ const CartPage = () => {
     fetchCart();
   }, []);
 
- 
   const handleIncrease = async (item) => {
-  if (loadingId) return;
-  setLoadingId(item.cartItemId);
+    if (loadingId) return;
+    setLoadingId(item.cartItemId);
 
-  const newQty = item.quantity + 1;
-  await cartService.updateQuantity(item.cartItemId, newQty);
+    const newQty = item.quantity + 1;
+    await cartService.updateQuantity(item.cartItemId, newQty);
 
-  await fetchCart();
+    await fetchCart();
 
-  // Emit sự kiện cartUpdated
-  const totalCount = items.reduce((sum, i) => 
-    i.cartItemId === item.cartItemId ? sum + newQty : sum + i.quantity, 0
-  );
-  window.dispatchEvent(new CustomEvent("cartUpdated", { detail: totalCount }));
-
-  setLoadingId(null);
-};
-
-const handleDecrease = async (item) => {
-  if (loadingId || item.quantity <= 1) return;
-  setLoadingId(item.cartItemId);
-
-  const newQty = item.quantity - 1;
-  await cartService.updateQuantity(item.cartItemId, newQty);
-
-  await fetchCart();
-
-  const totalCount = items.reduce((sum, i) =>
-    i.cartItemId === item.cartItemId ? sum + newQty : sum + i.quantity, 0
-  );
-  window.dispatchEvent(new CustomEvent("cartUpdated", { detail: totalCount }));
-
-  setLoadingId(null);
-};
-
-const handleDelete = async () => {
-  if (!confirmDelete) return;
-
-  await cartService.removeItem(confirmDelete.cartItemId);
-  await fetchCart();
-
-  // Emit tổng số lượng mới
-  const totalCount = items
-    .filter(i => i.cartItemId !== confirmDelete.cartItemId)
-    .reduce((sum, i) => sum + i.quantity, 0);
-
-  window.dispatchEvent(new CustomEvent("cartUpdated", { detail: totalCount }));
-
-  setConfirmDelete(null);
-};
-
-// Hàm lấy ảnh theo màu giống ProductCard nhưng URL theo API mới
-const getImageByColor = (item) => {
-  if (item.color && item.productColors?.length > 0) {
-    const colorOption = item.productColors.find(
-      (c) => c.color.toLowerCase() === item.color.toLowerCase()
+    // Emit sự kiện cartUpdated
+    const totalCount = items.reduce(
+      (sum, i) =>
+        i.cartItemId === item.cartItemId ? sum + newQty : sum + i.quantity,
+      0
     );
-    return colorOption?.productImage || item.productImage;
-  }
-  return item.productImage;
-};
+    window.dispatchEvent(
+      new CustomEvent("cartUpdated", { detail: totalCount })
+    );
+
+    setLoadingId(null);
+  };
+
+  const handleDecrease = async (item) => {
+    if (loadingId || item.quantity <= 1) return;
+    setLoadingId(item.cartItemId);
+
+    const newQty = item.quantity - 1;
+    await cartService.updateQuantity(item.cartItemId, newQty);
+
+    await fetchCart();
+
+    const totalCount = items.reduce(
+      (sum, i) =>
+        i.cartItemId === item.cartItemId ? sum + newQty : sum + i.quantity,
+      0
+    );
+    window.dispatchEvent(
+      new CustomEvent("cartUpdated", { detail: totalCount })
+    );
+
+    setLoadingId(null);
+  };
+
+  const handleDelete = async () => {
+    if (!confirmDelete) return;
+
+    await cartService.removeItem(confirmDelete.cartItemId);
+    await fetchCart();
+
+    // Emit tổng số lượng mới
+    const totalCount = items
+      .filter((i) => i.cartItemId !== confirmDelete.cartItemId)
+      .reduce((sum, i) => sum + i.quantity, 0);
+
+    window.dispatchEvent(
+      new CustomEvent("cartUpdated", { detail: totalCount })
+    );
+
+    setConfirmDelete(null);
+  };
+
+  // Hàm lấy ảnh theo màu giống ProductCard nhưng URL theo API mới
+  const getImageByColor = (item) => {
+    if (item.color && item.productColors?.length > 0) {
+      const colorOption = item.productColors.find(
+        (c) => c.color.toLowerCase() === item.color.toLowerCase()
+      );
+      return colorOption?.productImage || item.productImage;
+    }
+    return item.productImage;
+  };
 
   // Tính tổng tiền
   const totalPrice = items.reduce((sum, item) => {
@@ -93,13 +102,7 @@ const getImageByColor = (item) => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-
-      <Breadcrumb
-        paths={[
-          { label: "Home", link: "/" },
-          { label: "Cart" },
-        ]}
-      />
+      <Breadcrumb paths={[{ label: "Home", link: "/" }, { label: "Cart" }]} />
 
       <h1 className="text-2xl font-bold mb-2">Giỏ hàng của bạn</h1>
       <p className="text-gray-500 mb-6">Xem lại các sản phẩm bạn đã chọn</p>
@@ -128,17 +131,17 @@ const getImageByColor = (item) => {
 
               return (
                 <tr key={item.cartItemId} className="border-b last:border-none">
-
                   {/* PRODUCT */}
                   <td className="p-3">
                     <div className="flex items-center gap-4">
                       <div className="relative">
                         <img
-                          src={`http://localhost:8080/api/image/${getImageByColor(item)}`}
+                          src={`http://localhost:8080/api/image/${getImageByColor(
+                            item
+                          )}`}
                           alt={item.productName}
                           className="w-20 h-20 object-cover rounded-lg"
                         />
-
 
                         {hasDiscount && (
                           <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
@@ -204,7 +207,11 @@ const getImageByColor = (item) => {
 
                   {/* TOTAL PRICE */}
                   <td className="text-center">
-                    <span className={`font-bold ${hasDiscount ? "text-red-600" : ""}`}>
+                    <span
+                      className={`font-bold ${
+                        hasDiscount ? "text-red-600" : ""
+                      }`}
+                    >
                       {totalItemPrice.toLocaleString()}đ
                     </span>
                   </td>
@@ -222,7 +229,6 @@ const getImageByColor = (item) => {
               );
             })}
           </tbody>
-
         </table>
       </div>
 
@@ -254,7 +260,6 @@ const getImageByColor = (item) => {
       {confirmDelete && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-[360px] shadow-lg relative">
-
             <button
               className="absolute top-3 right-3 text-gray-500 hover:text-black"
               onClick={() => setConfirmDelete(null)}
@@ -264,7 +269,8 @@ const getImageByColor = (item) => {
 
             <h2 className="text-lg font-semibold mb-2">Xóa sản phẩm?</h2>
             <p className="text-gray-600 text-sm">
-              Bạn có chắc muốn xóa <b>{confirmDelete.productName}</b> khỏi giỏ hàng không?
+              Bạn có chắc muốn xóa <b>{confirmDelete.productName}</b> khỏi giỏ
+              hàng không?
             </p>
 
             <div className="flex justify-end gap-3 mt-4">
@@ -282,7 +288,6 @@ const getImageByColor = (item) => {
                 Xóa
               </button>
             </div>
-
           </div>
         </div>
       )}

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-const IMAGE_BASE_URL = "http://localhost:8080/api/image"; 
+const IMAGE_BASE_URL = "http://localhost:8080/api/image";
 
 const ProductImageCarousel = ({ images = [], activeImage }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (!activeImage) return;
-    const index = images.findIndex(img => img === activeImage);
+    const index = images.findIndex((img) => img === activeImage);
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (index !== -1) setCurrentIndex(index);
   }, [activeImage, images]);
@@ -16,9 +16,7 @@ const ProductImageCarousel = ({ images = [], activeImage }) => {
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   return (
@@ -31,13 +29,12 @@ const ProductImageCarousel = ({ images = [], activeImage }) => {
         }}
       >
         {images.map((img, idx) => (
-        <img
+          <img
             key={idx}
-            src={`${IMAGE_BASE_URL}${img.startsWith('/') ? '' : '/'}${img}`}
+            src={`${IMAGE_BASE_URL}${img.startsWith("/") ? "" : "/"}${img}`}
             alt={`slide-${idx}`}
-            className="w-full h-full object-contain flex-shrink-0" 
-        />
-
+            className="w-full h-full object-contain flex-shrink-0"
+          />
         ))}
       </div>
 

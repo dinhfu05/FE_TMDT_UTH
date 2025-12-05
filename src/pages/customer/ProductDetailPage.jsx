@@ -1,5 +1,4 @@
-// ProductDetailPage.jsx
-import React, { useState, useEffect, useMemo, } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   productService,
   categoryService,
@@ -11,6 +10,7 @@ import ProductImageCarousel from "../../components/customer/ProductImageCarousel
 import Breadcrumb from "../../components/customer/Breadcrumb";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductCard from "../../components/customer/ProductCard";
+import { Star, User } from "lucide-react"; // Import Icon
 
 const formatCurrency = (amount) => {
   if (typeof amount !== "number") return "0₫";
@@ -36,34 +36,56 @@ const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("details");
 
+  // State cho Reviews và Rating
+  const [reviews, setReviews] = useState([]);
+  const [ratingData, setRatingData] = useState({ avgRating: 0, count: 0 });
+
   const [mainImage, setMainImage] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
-  // --- Fetch Product ---
+  // --- Fetch Product & Reviews ---
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
       setError(null);
       try {
-        const data = await productService.getProductById(productId);
-        const [productsData, categoryData] = await Promise.all([
-          productService.getAllProducts(1, 9999),
-          categoryService.getAllCategories(1, 50),
-        ]);
+        // Gọi song song: Product info, All products (cho recommend), Categories, Reviews
+        const [productData, productsData, categoryData, reviewsData] =
+          await Promise.all([
+            productService.getProductById(productId),
+            productService.getAllProducts(1, 9999),
+            categoryService.getAllCategories(1, 50),
+            productService.getProductReviews(productId, 1, 100), // Lấy tối đa 100 review
+          ]);
+
+        // Xử lý Category count (như cũ)
         const countByCategory = {};
         productsData.forEach((p) => {
           if (!countByCategory[p.categoryId]) countByCategory[p.categoryId] = 0;
           countByCategory[p.categoryId]++;
         });
-
         const categoriesWithCount = categoryData.map((c) => ({
           ...c,
           totalItems: countByCategory[c.categoryId] || 0,
         }));
-        setProduct(data);
-        setSelectedColor(data?.productColors?.[0] || null);
-        setMainImage(data?.productImage || null);
+
+        // Xử lý Rating từ reviewsData
+        let avg = 0;
+        if (reviewsData && reviewsData.length > 0) {
+          const total = reviewsData.reduce(
+            (acc, r) => acc + Number(r.rating || 0),
+            0
+          );
+          avg = (total / reviewsData.length).toFixed(1);
+        }
+
+        setProduct(productData);
+        setReviews(reviewsData || []);
+        setRatingData({ avgRating: avg, count: reviewsData?.length || 0 });
+
+        setSelectedColor(productData?.productColors?.[0] || null);
+        setMainImage(productData?.productImage || null);
         setRecommendProduct(shuffle([...productsData]).slice(0, 5));
         setCategories(categoriesWithCount);
       } catch (err) {
@@ -83,7 +105,6 @@ const ProductDetailPage = () => {
     const normalized = colorName.trim().toLowerCase().replace(/\s+/g, "");
 
     const colorMap = {
-      // Cơ bản
       white: "#FFFFFF",
       black: "#000000",
       gray: "#6B7280",
@@ -102,7 +123,6 @@ const ProductDetailPage = () => {
       natural: "#F5F5DC",
       mixed: "#C0C0C0",
     };
-
     return colorMap[normalized] || "#CCCCCC";
   };
 
@@ -172,6 +192,21 @@ const ProductDetailPage = () => {
     }
   };
 
+  // Helper render sao
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, i) => (
+      <Star
+        key={i}
+        size={16}
+        className={`${
+          i < Math.round(rating)
+            ? "text-yellow-400 fill-yellow-400"
+            : "text-gray-300 fill-gray-100"
+        }`}
+      />
+    ));
+  };
+
   if (loading)
     return <div className="text-center py-20">Đang tải sản phẩm...</div>;
   if (error)
@@ -194,15 +229,12 @@ const ProductDetailPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-8 rounded-xl shadow-lg">
           {/* Left: Images */}
           <div className="space-y-4">
-            {/* KHUNG ẢNH LỚN */}
             <div className="w-full aspect-square rounded-xl overflow-hidden bg-[#fafafa] border border-gray-200 flex items-center justify-center">
               <ProductImageCarousel
                 images={allImages}
                 activeImage={mainImage}
               />
             </div>
-
-            {/* Thumbnails */}
             <div className="flex gap-2 overflow-x-auto scrollbar-none scroll-smooth">
               {allImages.map((img, idx) => (
                 <div
@@ -228,9 +260,31 @@ const ProductDetailPage = () => {
 
           {/* Right: Info */}
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-gray-900">
-              {product.productName}
-            </h1>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                {product.productName}
+              </h1>
+              {/* --- HIỂN THỊ RATING SUMMARY --- */}
+              <div className="flex items-center gap-2">
+                <div className="flex gap-0.5">
+                  {renderStars(Number(ratingData.avgRating))}
+                </div>
+                <span className="text-sm font-medium text-gray-600">
+                  {ratingData.count > 0
+                    ? `(${ratingData.avgRating}/5 từ ${ratingData.count} đánh giá)`
+                    : "(Chưa có đánh giá)"}
+                </span>
+                {ratingData.count > 0 && (
+                  <button
+                    onClick={() => setActiveTab("reviews")}
+                    className="text-sm text-blue-600 hover:underline ml-2"
+                  >
+                    Xem tất cả
+                  </button>
+                )}
+              </div>
+            </div>
+
             <div className="flex items-baseline gap-3">
               {product.discount > 0 ? (
                 <>
@@ -381,14 +435,14 @@ const ProductDetailPage = () => {
           </div>
         </div>
 
-        {/* Tabs with sample data */}
+        {/* Tabs */}
         <div className="mt-12">
-          <div className="flex border-b border-gray-200">
-            {["details", "shipping", "return", "care"].map((tab) => (
+          <div className="flex border-b border-gray-200 overflow-x-auto">
+            {["details", "reviews", "shipping", "return", "care"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-8 py-3 text-lg font-semibold transition-colors 
+                className={`px-8 py-3 text-lg font-semibold transition-colors whitespace-nowrap
                   ${
                     activeTab === tab
                       ? "text-gray-900 border-b-2 border-blue-600"
@@ -397,6 +451,8 @@ const ProductDetailPage = () => {
               >
                 {tab === "details"
                   ? "Thông tin chi tiết"
+                  : tab === "reviews"
+                  ? `Đánh giá (${ratingData.count})`
                   : tab === "shipping"
                   ? "Hướng dẫn mua hàng"
                   : tab === "return"
@@ -405,7 +461,7 @@ const ProductDetailPage = () => {
               </button>
             ))}
           </div>
-          <div className="py-6 bg-white p-6 rounded-b-xl shadow-md border-x border-b border-gray-200">
+          <div className="py-6 bg-white p-6 rounded-b-xl shadow-md border-x border-b border-gray-200 min-h-[200px]">
             {activeTab === "details" && (
               <div className="text-gray-700 leading-relaxed space-y-3">
                 <p className="font-semibold">Chi tiết sản phẩm:</p>
@@ -419,6 +475,56 @@ const ProductDetailPage = () => {
                 </ul>
               </div>
             )}
+
+            {/* --- TAB ĐÁNH GIÁ --- */}
+            {activeTab === "reviews" && (
+              <div className="space-y-6">
+                {reviews.length > 0 ? (
+                  <div className="grid gap-6">
+                    {reviews.map((review) => (
+                      <div
+                        key={review.reviewId}
+                        className="border-b pb-6 last:border-0 last:pb-0"
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                            <User size={20} />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <h4 className="font-bold text-gray-900">
+                                  {review.userNameCustomer ||
+                                    "Người dùng ẩn danh"}
+                                </h4>
+                                <div className="flex gap-0.5 mt-1">
+                                  {renderStars(review.rating)}
+                                </div>
+                              </div>
+                              {/* Nếu API có trả về ngày tháng thì hiển thị ở đây */}
+                              {/* <span className="text-sm text-gray-400">2 ngày trước</span> */}
+                            </div>
+                            <p className="mt-2 text-gray-700">
+                              {review.reviewContent}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-10 text-gray-500">
+                    <p className="mb-2">
+                      Chưa có đánh giá nào cho sản phẩm này.
+                    </p>
+                    <p className="text-sm">
+                      Hãy là người đầu tiên mua và đánh giá sản phẩm!
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
             {activeTab === "shipping" && (
               <div className="text-gray-700 space-y-2">
                 <p className="font-semibold">Hướng dẫn mua hàng:</p>
@@ -462,24 +568,6 @@ const ProductDetailPage = () => {
           <p className="text-gray-600 mb-8">
             Khám phá thêm các sản phẩm cùng loại
           </p>
-
-          {/* <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-            {Array(6).fill(null).map((_, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 group">
-                <div className="p-4 space-y-2">
-                  <div className="w-full aspect-square bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 font-medium mb-3">
-                    [Image of Product]
-                  </div>
-                  <h3 className="font-semibold text-lg text-gray-900">T-Shirt</h3>
-                  <p className="text-sm text-gray-500 truncate">Áo Thun Basic</p>
-                  <p className="text-red-500 font-bold">349,000₫</p>
-                  <button className="w-full bg-blue-600 text-white text-sm py-2 rounded-lg hover:bg-blue-700 transition">
-                    Thêm vào giỏ hàng
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
       <div className=" pb-3">

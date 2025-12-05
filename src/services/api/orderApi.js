@@ -6,13 +6,17 @@ const getHeaders = () => {
   const token = localStorage.getItem("token");
   return {
     "Content-Type": "application/json",
-    "Authorization": token ? `Bearer ${token}` : "",
-    "Accept": "*/*"
+    Authorization: token ? `Bearer ${token}` : "",
+    Accept: "*/*",
   };
 };
 
 const orderApi = {
-  create: async ({ addressShippingId, paymentMethod, orderDetailRequestDTOs }) => {
+  create: async ({
+    addressShippingId,
+    paymentMethod,
+    orderDetailRequestDTOs,
+  }) => {
     try {
       const response = await fetch(API_BASE, {
         method: "POST",
@@ -26,7 +30,9 @@ const orderApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -46,7 +52,9 @@ const orderApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -66,7 +74,9 @@ const orderApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -82,12 +92,14 @@ const orderApi = {
       const response = await fetch(`${API_BASE}/${orderId}/canceled`, {
         method: "PATCH",
         headers: getHeaders(),
-        body: JSON.stringify({})
+        body: JSON.stringify({}),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -107,7 +119,9 @@ const orderApi = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();
@@ -124,13 +138,15 @@ const orderApi = {
         headers: getHeaders(),
         body: JSON.stringify({
           orderId,
-          description
+          description,
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
       }
 
       return await response.json();

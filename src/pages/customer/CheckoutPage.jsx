@@ -18,7 +18,7 @@ const CheckoutPage = () => {
     phoneNumber: "",
     detailedAdress: "",
     ward: "",
-    province: ""
+    province: "",
   });
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [cartItems, setCartItems] = useState([]);
@@ -61,7 +61,7 @@ const CheckoutPage = () => {
           phoneNumber: addressData[0].phoneNumber,
           detailedAdress: addressData[0].detailedAdress,
           ward: addressData[0].ward,
-          province: addressData[0].province
+          province: addressData[0].province,
         });
       }
     } catch (err) {
@@ -92,7 +92,7 @@ const CheckoutPage = () => {
         phoneNumber: "",
         detailedAdress: "",
         ward: "",
-        province: ""
+        province: "",
       });
 
       await fetchAddresses();
@@ -106,85 +106,80 @@ const CheckoutPage = () => {
     }
   };
 
- const handleOrder = async () => {
-  if (!selectedAddressId || selectedAddressId === "new") {
-    showError("Vui lòng chọn địa chỉ giao hàng!");
-    return;
-  }
-
-  if (cartItems.length === 0) {
-    showError("Giỏ hàng trống! Vui lòng thêm sản phẩm vào giỏ hàng.");
-    return;
-  }
-
-  setLoading(true);
-  setError(null);
-
-  try {
-    const orderDetailRequestDTOs = cartItems.map(item => ({
-      productDetailId: item.productDetailId,
-      quantity: item.quantity
-    }));
-
-    const orderResult = await orderApi.create({
-      addressShippingId: selectedAddressId,
-      paymentMethod,
-      orderDetailRequestDTOs
-    });
-
-    if (!orderResult?.success) {
-      showSuccess(orderResult?.message || "Đặt hàng thành công!");
+  const handleOrder = async () => {
+    if (!selectedAddressId || selectedAddressId === "new") {
+      showError("Vui lòng chọn địa chỉ giao hàng!");
       return;
     }
 
-    const orderInfo = orderResult.data;
-    showSuccess(`Đặt hàng thành công! Mã đơn hàng: ${orderInfo.orderId}`);
-
-    if (paymentMethod === "ZALOPAY") {
-      const zalopayResponse = await fetch("http://localhost:8080/api/zalopay/create-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          "Accept": "*/*"
-        },
-        body: JSON.stringify({
-          orderId: orderInfo.orderId,
-          description: `THANH TOAN DON HANG #${orderInfo.orderId}`
-        })
-      });
-
-      const zalopayData = await zalopayResponse.json();
-
-      if (zalopayData.success && zalopayData.data?.order_url) {
-        console.log("Redirect URL:", zalopayData.data.order_url);
-        window.open(zalopayData.data.order_url, "_self");
-      } else {
-        showError("Không lấy được link ZaloPay từ server!");
-      }
-    } else {
-      // COD
-      navigate("/my-orders"); 
+    if (cartItems.length === 0) {
+      showError("Giỏ hàng trống! Vui lòng thêm sản phẩm vào giỏ hàng.");
+      return;
     }
 
-  } catch (err) {
-    console.error("Error creating order:", err);
-    setError("Đặt hàng thất bại. Vui lòng thử lại.");
-    showError("Đặt hàng thất bại. Vui lòng thử lại.");
-  } finally {
-    setLoading(false);
-  }
-};
+    setLoading(true);
+    setError(null);
 
+    try {
+      const orderDetailRequestDTOs = cartItems.map((item) => ({
+        productDetailId: item.productDetailId,
+        quantity: item.quantity,
+      }));
 
+      const orderResult = await orderApi.create({
+        addressShippingId: selectedAddressId,
+        paymentMethod,
+        orderDetailRequestDTOs,
+      });
 
+      if (!orderResult?.success) {
+        showSuccess(orderResult?.message || "Đặt hàng thành công!");
+        return;
+      }
 
+      const orderInfo = orderResult.data;
+      showSuccess(`Đặt hàng thành công! Mã đơn hàng: ${orderInfo.orderId}`);
 
+      if (paymentMethod === "ZALOPAY") {
+        const zalopayResponse = await fetch(
+          "http://localhost:8080/api/zalopay/create-order",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Accept: "*/*",
+            },
+            body: JSON.stringify({
+              orderId: orderInfo.orderId,
+              description: `THANH TOAN DON HANG #${orderInfo.orderId}`,
+            }),
+          }
+        );
 
+        const zalopayData = await zalopayResponse.json();
 
+        if (zalopayData.success && zalopayData.data?.order_url) {
+          console.log("Redirect URL:", zalopayData.data.order_url);
+          window.open(zalopayData.data.order_url, "_self");
+        } else {
+          showError("Không lấy được link ZaloPay từ server!");
+        }
+      } else {
+        // COD
+        navigate("/my-orders");
+      }
+    } catch (err) {
+      console.error("Error creating order:", err);
+      setError("Đặt hàng thất bại. Vui lòng thử lại.");
+      showError("Đặt hàng thất bại. Vui lòng thử lại.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
- const subtotal = cartItems.reduce((sum, item) => {
-    const price = item.price || 0; 
+  const subtotal = cartItems.reduce((sum, item) => {
+    const price = item.price || 0;
     const discount = item.discount || 0;
     const finalPrice = price * (1 - discount / 100);
     return sum + finalPrice * item.quantity;
@@ -192,20 +187,17 @@ const CheckoutPage = () => {
   const freeShipThreshold = 1000000;
   const baseShippingFee = 30000;
   const shippingFee = subtotal >= freeShipThreshold ? 0 : baseShippingFee;
-  const amountToFreeShip = subtotal < freeShipThreshold ? freeShipThreshold - subtotal : 0;
+  const amountToFreeShip =
+    subtotal < freeShipThreshold ? freeShipThreshold - subtotal : 0;
   const total = subtotal + shippingFee;
-
 
   return (
     <div className="bg-gray-50 min-h-screen py-10">
       <div className="max-w-7xl mx-auto px-4">
         {/* BREADCRUMB */}
-      <Breadcrumb
-        paths={[
-          { label: "Home", link: "/" },
-          { label: "Payment" },
-        ]}
-      />
+        <Breadcrumb
+          paths={[{ label: "Home", link: "/" }, { label: "Payment" }]}
+        />
         {error && (
           <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
             <span className="block sm:inline">{error}</span>
@@ -223,7 +215,9 @@ const CheckoutPage = () => {
           <div className="flex-1 space-y-6">
             {/* THÔNG TIN NHẬN HÀNG */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-bold mb-6 uppercase">Thông tin nhận hàng</h2>
+              <h2 className="text-xl font-bold mb-6 uppercase">
+                Thông tin nhận hàng
+              </h2>
 
               {/* Card hiển thị địa chỉ đã chọn */}
               <div className="mb-6">
@@ -237,17 +231,39 @@ const CheckoutPage = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="font-semibold text-gray-900">
-                            {addresses.find(a => a.addressId === selectedAddressId)?.recipientName}
+                            {
+                              addresses.find(
+                                (a) => a.addressId === selectedAddressId
+                              )?.recipientName
+                            }
                           </span>
                           <span className="text-sm text-gray-500">|</span>
                           <span className="text-sm text-gray-600">
-                            {addresses.find(a => a.addressId === selectedAddressId)?.phoneNumber}
+                            {
+                              addresses.find(
+                                (a) => a.addressId === selectedAddressId
+                              )?.phoneNumber
+                            }
                           </span>
                         </div>
                         <p className="text-sm text-gray-600">
-                          {addresses.find(a => a.addressId === selectedAddressId)?.detailedAdress},{" "}
-                          {addresses.find(a => a.addressId === selectedAddressId)?.ward},{" "}
-                          {addresses.find(a => a.addressId === selectedAddressId)?.province}
+                          {
+                            addresses.find(
+                              (a) => a.addressId === selectedAddressId
+                            )?.detailedAdress
+                          }
+                          ,{" "}
+                          {
+                            addresses.find(
+                              (a) => a.addressId === selectedAddressId
+                            )?.ward
+                          }
+                          ,{" "}
+                          {
+                            addresses.find(
+                              (a) => a.addressId === selectedAddressId
+                            )?.province
+                          }
                         </p>
                       </div>
                       <button
@@ -280,7 +296,12 @@ const CheckoutPage = () => {
                       placeholder="Nhập họ và tên"
                       required
                       value={newAddress.recipientName}
-                      onChange={(e) => setNewAddress(prev => ({ ...prev, recipientName: e.target.value }))}
+                      onChange={(e) =>
+                        setNewAddress((prev) => ({
+                          ...prev,
+                          recipientName: e.target.value,
+                        }))
+                      }
                     />
                     <input
                       type="tel"
@@ -289,7 +310,12 @@ const CheckoutPage = () => {
                       required
                       pattern="[0-9]{10,11}"
                       value={newAddress.phoneNumber}
-                      onChange={(e) => setNewAddress(prev => ({ ...prev, phoneNumber: e.target.value }))}
+                      onChange={(e) =>
+                        setNewAddress((prev) => ({
+                          ...prev,
+                          phoneNumber: e.target.value,
+                        }))
+                      }
                     />
                   </div>
 
@@ -300,7 +326,12 @@ const CheckoutPage = () => {
                       placeholder="Tỉnh/thành phố"
                       required
                       value={newAddress.province}
-                      onChange={(e) => setNewAddress(prev => ({ ...prev, province: e.target.value }))}
+                      onChange={(e) =>
+                        setNewAddress((prev) => ({
+                          ...prev,
+                          province: e.target.value,
+                        }))
+                      }
                     />
                     <input
                       type="text"
@@ -308,7 +339,12 @@ const CheckoutPage = () => {
                       placeholder="Xã/phường/thị trấn"
                       required
                       value={newAddress.ward}
-                      onChange={(e) => setNewAddress(prev => ({ ...prev, ward: e.target.value }))}
+                      onChange={(e) =>
+                        setNewAddress((prev) => ({
+                          ...prev,
+                          ward: e.target.value,
+                        }))
+                      }
                     />
                   </div>
 
@@ -318,7 +354,12 @@ const CheckoutPage = () => {
                     rows="3"
                     required
                     value={newAddress.detailedAdress}
-                    onChange={(e) => setNewAddress(prev => ({ ...prev, detailedAdress: e.target.value }))}
+                    onChange={(e) =>
+                      setNewAddress((prev) => ({
+                        ...prev,
+                        detailedAdress: e.target.value,
+                      }))
+                    }
                   />
 
                   <button
@@ -326,7 +367,11 @@ const CheckoutPage = () => {
                     className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:bg-blue-300 transition"
                     disabled={loading || selectedAddressId === null}
                   >
-                    {loading ? "Đang lưu..." : selectedAddressId === "new" ? "Lưu địa chỉ" : "Cập nhật"}
+                    {loading
+                      ? "Đang lưu..."
+                      : selectedAddressId === "new"
+                      ? "Lưu địa chỉ"
+                      : "Cập nhật"}
                   </button>
                 </div>
               </form>
@@ -342,11 +387,16 @@ const CheckoutPage = () => {
           {/* RIGHT SIDE - ORDER SUMMARY */}
           <div className="w-full lg:w-96">
             <div className="bg-white rounded-lg shadow p-6 sticky top-4">
-              <h2 className="text-xl font-bold mb-6 uppercase">Tóm tắt đơn hàng</h2>
+              <h2 className="text-xl font-bold mb-6 uppercase">
+                Tóm tắt đơn hàng
+              </h2>
               {cartItems.length === 0 ? (
                 <div className="text-center py-8 text-gray-500">
                   <p>Giỏ hàng trống</p>
-                  <a href="/shop" className="text-blue-600 underline mt-2 inline-block">
+                  <a
+                    href="/shop"
+                    className="text-blue-600 underline mt-2 inline-block"
+                  >
                     Tiếp tục mua sắm
                   </a>
                 </div>
@@ -356,20 +406,33 @@ const CheckoutPage = () => {
                     <h3 className="font-semibold mb-3">SẢN PHẨM</h3>
                     <div className="space-y-3">
                       {cartItems.map((item, index) => (
-                        <div key={index} className="flex items-center gap-3 pb-3 border-b">
+                        <div
+                          key={index}
+                          className="flex items-center gap-3 pb-3 border-b"
+                        >
                           <div className="flex-1">
-                            <p className="font-medium text-sm">{item.productName}</p>
+                            <p className="font-medium text-sm">
+                              {item.productName}
+                            </p>
                             <p className="text-xs text-gray-500">
                               {item.color && `${item.color}, `}
-                              {item.productDetailsize && `${item.productDetailsize}`}
+                              {item.productDetailsize &&
+                                `${item.productDetailsize}`}
                             </p>
                             <div className="flex items-center justify-between mt-1">
-                              <span className="text-sm text-gray-600">Số lượng: {item.quantity}</span>
-                              <span className="text-sm text-gray-600 line-through"> 
+                              <span className="text-sm text-gray-600">
+                                Số lượng: {item.quantity}
+                              </span>
+                              <span className="text-sm text-gray-600 line-through">
                                 {item.price}
                               </span>
                               <span className="font-semibold">
-                                {(item.price * (1 - (item.discount || 0) / 100) * item.quantity).toLocaleString("vi-VN")}₫
+                                {(
+                                  item.price *
+                                  (1 - (item.discount || 0) / 100) *
+                                  item.quantity
+                                ).toLocaleString("vi-VN")}
+                                ₫
                               </span>
                             </div>
                           </div>
@@ -381,24 +444,40 @@ const CheckoutPage = () => {
                   <div className="space-y-2 mb-4 pb-4 border-b">
                     <div className="flex justify-between">
                       <span>Tạm tính:</span>
-                      <span className="font-semibold">{subtotal.toLocaleString("vi-VN")}₫</span>
+                      <span className="font-semibold">
+                        {subtotal.toLocaleString("vi-VN")}₫
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Vận chuyển:</span>
-                      <span className={shippingFee === 0 ? "text-green-600 font-semibold" : ""}>
-                        {shippingFee === 0 ? "Miễn phí" : `${shippingFee.toLocaleString("vi-VN")}₫`}
+                      <span
+                        className={
+                          shippingFee === 0
+                            ? "text-green-600 font-semibold"
+                            : ""
+                        }
+                      >
+                        {shippingFee === 0
+                          ? "Miễn phí"
+                          : `${shippingFee.toLocaleString("vi-VN")}₫`}
                       </span>
                     </div>
                   </div>
 
                   <div className="flex justify-between items-center text-lg font-bold mb-4">
                     <span>Tổng cộng:</span>
-                    <span className="text-blue-600">{total.toLocaleString("vi-VN")}₫</span>
+                    <span className="text-blue-600">
+                      {total.toLocaleString("vi-VN")}₫
+                    </span>
                   </div>
 
                   {amountToFreeShip > 0 ? (
                     <p className="text-sm text-gray-600 mb-4">
-                      Chỉ còn <span className="font-semibold text-red-600">{amountToFreeShip.toLocaleString("vi-VN")}₫</span> nữa là được free ship 🎁
+                      Chỉ còn{" "}
+                      <span className="font-semibold text-red-600">
+                        {amountToFreeShip.toLocaleString("vi-VN")}₫
+                      </span>{" "}
+                      nữa là được free ship 🎁
                     </p>
                   ) : (
                     <p className="text-sm text-green-600 font-semibold mb-4">
@@ -409,7 +488,9 @@ const CheckoutPage = () => {
                   <button
                     className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
                     onClick={handleOrder}
-                    disabled={loading || !selectedAddressId || cartItems.length === 0}
+                    disabled={
+                      loading || !selectedAddressId || cartItems.length === 0
+                    }
                   >
                     {loading ? "Đang đặt hàng..." : "ĐẶT HÀNG"}
                   </button>
@@ -429,8 +510,18 @@ const CheckoutPage = () => {
                   onClick={() => setShowAddressPopup(false)}
                   className="text-gray-400 hover:text-gray-600 transition"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
@@ -441,7 +532,9 @@ const CheckoutPage = () => {
                     <div
                       key={addr.addressId}
                       className={`flex items-center justify-between gap-3 p-4 border-2 rounded-lg transition-all hover:border-blue-400 hover:bg-blue-50 ${
-                        selectedAddressId === addr.addressId ? "border-blue-500 bg-blue-50" : "border-gray-200"
+                        selectedAddressId === addr.addressId
+                          ? "border-blue-500 bg-blue-50"
+                          : "border-gray-200"
                       }`}
                     >
                       <label className="flex-1 flex items-center gap-3 cursor-pointer">
@@ -457,16 +550,20 @@ const CheckoutPage = () => {
                               phoneNumber: addr.phoneNumber,
                               detailedAdress: addr.detailedAdress,
                               ward: addr.ward,
-                              province: addr.province
+                              province: addr.province,
                             });
                           }}
                           className="mt-1 w-4 h-4 text-blue-600"
                         />
                         <div>
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="font-semibold text-gray-900">{addr.recipientName}</span>
+                            <span className="font-semibold text-gray-900">
+                              {addr.recipientName}
+                            </span>
                             <span className="text-sm text-gray-500">|</span>
-                            <span className="text-sm text-gray-600">{addr.phoneNumber}</span>
+                            <span className="text-sm text-gray-600">
+                              {addr.phoneNumber}
+                            </span>
                           </div>
                           <p className="text-sm text-gray-600">
                             {addr.detailedAdress}, {addr.ward}, {addr.province}
@@ -487,7 +584,9 @@ const CheckoutPage = () => {
                   {/* Option Thêm địa chỉ mới */}
                   <div
                     className={`flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:border-blue-400 hover:bg-blue-50 ${
-                      selectedAddressId === "new" ? "border-blue-500 bg-blue-50" : "border-gray-200"
+                      selectedAddressId === "new"
+                        ? "border-blue-500 bg-blue-50"
+                        : "border-gray-200"
                     }`}
                     onClick={() => {
                       setSelectedAddressId("new");
@@ -496,12 +595,14 @@ const CheckoutPage = () => {
                         phoneNumber: "",
                         detailedAdress: "",
                         ward: "",
-                        province: ""
+                        province: "",
                       });
                     }}
                   >
                     <FaPlus className="text-blue-600" />
-                    <span className="font-semibold text-blue-600">Thêm địa chỉ mới</span>
+                    <span className="font-semibold text-blue-600">
+                      Thêm địa chỉ mới
+                    </span>
                   </div>
                 </div>
               </div>
@@ -533,7 +634,8 @@ const CheckoutPage = () => {
             <div className="bg-white rounded-xl w-full max-w-sm p-6 shadow-lg">
               <h3 className="text-lg font-bold mb-4">Xác nhận xóa</h3>
               <p className="text-sm text-gray-700 mb-6">
-                Bạn có chắc muốn xóa địa chỉ này? Hành động này không thể hoàn tác.
+                Bạn có chắc muốn xóa địa chỉ này? Hành động này không thể hoàn
+                tác.
               </p>
               <div className="flex justify-end gap-3">
                 <button
@@ -549,16 +651,21 @@ const CheckoutPage = () => {
                       await shippingAddressApi.delete(deleteAddressId);
                       showSuccess("Xóa địa chỉ thành công!");
                       fetchAddresses();
-                      if (selectedAddressId === deleteAddressId) setSelectedAddressId(null);
+                      if (selectedAddressId === deleteAddressId)
+                        setSelectedAddressId(null);
                       setDeleteAddressId(null);
                     } catch (error) {
-                      const msg = error?.response?.data?.message || "Xóa địa chỉ thất bại!";
+                      const msg =
+                        error?.response?.data?.message ||
+                        "Xóa địa chỉ thất bại!";
                       showError(msg);
                     } finally {
                       setLoadingDelete(false);
                     }
                   }}
-                  className={`px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700 transition ${loadingDelete ? "opacity-50 cursor-not-allowed" : ""}`}
+                  className={`px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700 transition ${
+                    loadingDelete ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                   disabled={loadingDelete}
                 >
                   {loadingDelete ? "Đang xóa..." : "Xóa"}

@@ -55,10 +55,9 @@ const Homepage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       {/* HERO */}
       <section className="w-full">
-       <HeroCarousel />
+        <HeroCarousel />
       </section>
 
       {/* NEW ARRIVALS */}
@@ -125,48 +124,53 @@ const Homepage = () => {
       </section>
 
       {/* WHY CHOOSE US */}
-     <section className="py-16 bg-white text-center">
-  <h2 className="text-2xl font-bold mb-2">Why Choose Tênbrand?</h2>
-  <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-    We deliver more than fashion — we offer a premium local brand experience crafted with passion, precision, and a strong sense of identity.
-  </p>
+      <section className="py-16 bg-white text-center">
+        <h2 className="text-2xl font-bold mb-2">Why Choose Tênbrand?</h2>
+        <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
+          We deliver more than fashion — we offer a premium local brand
+          experience crafted with passion, precision, and a strong sense of
+          identity.
+        </p>
 
-  <div className="grid md:grid-cols-3 gap-10 max-w-4xl mx-auto">
-    {/* Free Shipping */}
-    <div className="flex flex-col items-center animate-fade-in-up">
-      <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
-        <span className="text-blue-500 text-3xl">📦</span>
-      </div>
-      <h3 className="font-semibold mt-4">Free Shipping</h3>
-      <p className="text-gray-600 text-sm mt-2">
-        Enjoy complimentary shipping on all orders over <b>1,000,000 VND</b>, making your premium shopping experience smooth and worry-free.
-      </p>
-    </div>
+        <div className="grid md:grid-cols-3 gap-10 max-w-4xl mx-auto">
+          {/* Free Shipping */}
+          <div className="flex flex-col items-center animate-fade-in-up">
+            <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
+              <span className="text-blue-500 text-3xl">📦</span>
+            </div>
+            <h3 className="font-semibold mt-4">Free Shipping</h3>
+            <p className="text-gray-600 text-sm mt-2">
+              Enjoy complimentary shipping on all orders over{" "}
+              <b>1,000,000 VND</b>, making your premium shopping experience
+              smooth and worry-free.
+            </p>
+          </div>
 
-    {/* Quality Guarantee */}
-    <div className="flex flex-col items-center animate-fade-in-up">
-      <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-        <span className="text-green-500 text-3xl">🛡️</span>
-      </div>
-      <h3 className="font-semibold mt-4">Premium Quality Guarantee</h3>
-      <p className="text-gray-600 text-sm mt-2">
-        Every product is crafted with carefully selected materials and strict quality control, backed by a flexible 30-day return policy.
-      </p>
-    </div>
+          {/* Quality Guarantee */}
+          <div className="flex flex-col items-center animate-fade-in-up">
+            <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+              <span className="text-green-500 text-3xl">🛡️</span>
+            </div>
+            <h3 className="font-semibold mt-4">Premium Quality Guarantee</h3>
+            <p className="text-gray-600 text-sm mt-2">
+              Every product is crafted with carefully selected materials and
+              strict quality control, backed by a flexible 30-day return policy.
+            </p>
+          </div>
 
-    {/* 24/7 Support */}
-    <div className="flex flex-col items-center animate-fade-in-up">
-      <div className="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center">
-        <span className="text-yellow-500 text-3xl">⏰</span>
-      </div>
-      <h3 className="font-semibold mt-4">24/7 Customer Support</h3>
-      <p className="text-gray-600 text-sm mt-2">
-        Our dedicated support team is always ready to assist you anytime, ensuring a seamless and satisfying shopping journey.
-      </p>
-    </div>
-  </div>
-</section>
-
+          {/* 24/7 Support */}
+          <div className="flex flex-col items-center animate-fade-in-up">
+            <div className="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center">
+              <span className="text-yellow-500 text-3xl">⏰</span>
+            </div>
+            <h3 className="font-semibold mt-4">24/7 Customer Support</h3>
+            <p className="text-gray-600 text-sm mt-2">
+              Our dedicated support team is always ready to assist you anytime,
+              ensuring a seamless and satisfying shopping journey.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
