@@ -99,7 +99,7 @@ export default function AuthPage() {
       </div>
 
       {/* Form container */}
-      <div className="flex-1 flex items-center justify-center p-6">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center p-6">
         <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8 border border-black">
           {/* Tabs */}
           <div className="flex border-b mb-6">
