@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../../components/customer/ProductCard";
-import { productService } from "../../services/api/apiService";
+import { productService  } from "../../services/api/apiService";
 import Breadcrumb from "../../components/customer/Breadcrumb";
 
 const CategoryPage = () => {
-  const { categoryId } = useParams(); // ✅ LẤY TỪ URL
+  const { categoryId } = useParams(); 
+;
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 12;
+  const pageSize = 10;
 
   useEffect(() => {
-    setCurrentPage(1); // reset page khi đổi category
+    setCurrentPage(1); 
   }, [categoryId]);
 
   useEffect(() => {
     fetchProducts();
+    window.scrollTo(0, 0); 
   }, [currentPage, categoryId]);
+  
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -25,7 +28,7 @@ const CategoryPage = () => {
       const data = await productService.getAllProducts(
         currentPage,
         pageSize,
-        categoryId // ✅ DYNAMIC
+        categoryId 
       );
       setProducts(data);
     } catch (error) {
@@ -34,6 +37,7 @@ const CategoryPage = () => {
       setLoading(false);
     }
   };
+   
 
   return (
     <div className="flex-1">
@@ -65,6 +69,26 @@ const CategoryPage = () => {
             ))}
           </div>
         )}
+        {/* Pagination */}
+        <div className="flex justify-center gap-2 mt-6">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-1 border rounded disabled:opacity-50"
+          >
+            Prev
+          </button>
+
+          <span className="px-3 py-1 border rounded">{currentPage}</span>
+
+          <button
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={products.length < pageSize}
+            className="px-3 py-1 border rounded disabled:opacity-50" 
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
