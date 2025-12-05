@@ -17,7 +17,7 @@ import AboutPage from "../pages/customer/AboutPage";
 import CategoryPage from "../pages/customer/CategoryPage";
 
 //admin pages
-import TongQuan from "../pages/admin/Tongquan";
+import Home from "../pages/admin/Home";
 import OrderManagement from "../pages/admin/OrderManagement";
 import ProductManagemenr from "../pages/admin/ProductManagemenr";
 import CustomerManagement from "../pages/admin/CustomerManagement";
@@ -31,7 +31,7 @@ const routes = [
       <ProtectedRoute element={<AdminLayout />} allowedUsers={["ROLE_ADMIN"]} />
     ),
     children: [
-      { index: true, element: <TongQuan /> },
+      { index: true, element: <Home /> },
       { path: "orders", element: <OrderManagement /> },
       { path: "products", element: <ProductManagemenr /> },
       { path: "customers", element: <CustomerManagement /> },

@@ -4,6 +4,7 @@ import Sidebar from "../../components/admin/SideBar";
 import Header from "../../components/admin/Header";
 import MonthlyChart from "../../components/admin/MonthlyChart";
 import TopProducts from "../../components/admin/TopProducts";
+import { Link } from "react-router-dom";
 import {
   ShoppingCart,
   Users,
@@ -13,7 +14,7 @@ import {
   Plus,
 } from "lucide-react";
 
-export default function TongQuan() {
+export default function Home() {
   const { loading, data } = useDashboard();
 
   if (loading)
@@ -71,19 +72,24 @@ export default function TongQuan() {
             title="Đơn hàng mới"
             value={data.newOrders}
             trend="+5%"
+            href="/admin/orders" 
             icon={<ShoppingCart size={20} className="text-gray-600" />}
           />
+
           <StatCard
             title="Khách hàng"
             value={data.customers}
             trend="+2.4%"
+            href="/admin/customers" 
             icon={<Users size={20} className="text-gray-600" />}
           />
+
           <StatCard
             title="Sắp hết hàng"
             value={data.lowStock}
             trend="Cần nhập"
             isWarning
+            href="/admin/products?quantity=low" 
             icon={<Package size={20} className="text-gray-600" />}
           />
         </section>
@@ -212,9 +218,16 @@ export default function TongQuan() {
 }
 
 // Helper Components (Giữ nguyên trong file này hoặc tách ra file utils/UIComponents.js)
-function StatCard({ title, value, trend, icon, isWarning }) {
-  return (
-    <div className="bg-white p-6 rounded-[32px] shadow-sm border border-gray-100 hover:-translate-y-1 transition-transform duration-200">
+function StatCard({ title, value, trend, icon, isWarning , href }) {
+  const CardWrapper = href ? Link : 'div';
+  const wrapperProps = href ? { to: href } : {};
+   return (
+    <CardWrapper
+      {...wrapperProps}
+      className={`bg-white p-6 rounded-[32px] shadow-sm border border-gray-100 transition-transform duration-200 ${
+        href ? 'hover:-translate-y-1 hover:shadow-lg cursor-pointer' : '' 
+      }`}
+    >
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className="text-gray-500 text-sm font-medium">{title}</h3>
@@ -236,7 +249,7 @@ function StatCard({ title, value, trend, icon, isWarning }) {
         </span>
         <span className="text-gray-400 text-xs">so với hôm qua</span>
       </div>
-    </div>
+    </CardWrapper>
   );
 }
 
